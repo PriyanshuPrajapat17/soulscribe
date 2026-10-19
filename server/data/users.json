@@ -1,0 +1,81 @@
+{
+  "1234567890": {
+    "phone": "1234567890",
+    "name": "Soulful One",
+    "createdAt": "2025-07-01T00:00:00Z",
+    "orders": [
+      {
+        "id": "SS-0042",
+        "name": "108 Days with Krishna Journal",
+        "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/36.png?v=1772190082",
+        "url": "product/108-days-with-krishna.html",
+        "price": "₹899",
+        "qty": 1,
+        "status": "delivered",
+        "placedOn": "2025-07-18",
+        "deliveredOn": "2025-07-23",
+        "trackingId": "SS-DELHVRY-20250718"
+      },
+      {
+        "id": "SS-0051",
+        "name": "Thank You Krishna Journal",
+        "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/3.png?v=1772213561",
+        "url": "product/thankyou-krishna.html",
+        "price": "₹799",
+        "qty": 1,
+        "status": "transit",
+        "placedOn": "2025-07-24",
+        "estimatedDelivery": "2025-07-30",
+        "trackingId": "SS-DELHVRY-20250724",
+        "trackingSteps": [
+          { "label": "Order Placed", "sub": "24 Jul", "done": true },
+          { "label": "Confirmed", "sub": "24 Jul", "done": true },
+          { "label": "Packed", "sub": "25 Jul", "done": true },
+          { "label": "In Transit", "sub": "On the way!", "done": false, "active": true },
+          { "label": "Delivered", "sub": "28–30 Jul", "done": false }
+        ]
+      },
+      {
+        "id": "SS-0058",
+        "name": "Heart of Virtues Journal",
+        "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/14.png?v=1772192437",
+        "url": "product/heart-of-virtues.html",
+        "price": "₹849",
+        "qty": 2,
+        "status": "processing",
+        "placedOn": "2025-07-26",
+        "trackingId": "SS-PENDING-20250726"
+      }
+    ],
+    "masterclass": [
+      {
+        "id": "mc-1",
+        "tag": "✦ EXCLUSIVE FOR YOU",
+        "title": "Journaling to Connect with the Divine",
+        "desc": "A guided exploration of how to use your Soulscribe journal as a sacred practice. Learn to create rituals, cultivate gratitude, and let your pen become a bridge between your heart and the Divine.",
+        "youtubeId": "dQw4w9WgXcQ"
+      },
+      {
+        "id": "mc-2",
+        "tag": "BONUS SESSION",
+        "title": "The Art of Free Flow Journaling",
+        "desc": "Free flow journaling is one of the most powerful tools for clarity, release and self-discovery. In this session, we guide you through writing without judgment — pure, honest expression from the soul.",
+        "youtubeId": "dQw4w9WgXcQ"
+      }
+    ],
+    "resources": [
+      { "id": "r1", "name": "7-Day Soul Reset Challenge", "type": "PDF · Workbook", "icon": "🌸", "color": "#fef3c7" },
+      { "id": "r2", "name": "30 Gratitude Prompts", "type": "PDF · Prompt Sheet", "icon": "✍️", "color": "#e8f8ed" },
+      { "id": "r3", "name": "Morning Ritual Guide", "type": "PDF · Guide", "icon": "🌅", "color": "#fff0f6" },
+      { "id": "r4", "name": "Soul Affirmations Deck", "type": "PDF · Printable Cards", "icon": "💛", "color": "#eff6ff" },
+      { "id": "r5", "name": "Breathwork & Journaling", "type": "PDF · Practice Guide", "icon": "🌿", "color": "#f0fdf4" },
+      { "id": "r6", "name": "Nama Japa Practice Sheet", "type": "PDF · Practice Sheet", "icon": "🙏", "color": "#fef9e7" }
+    ],
+    "suggested": [
+      { "name": "Prayers from Within", "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/38.png?v=1772218095", "url": "product/prayers-from-within.html", "price": "₹849" },
+      { "name": "Mercy & Meltdowns", "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/37.png?v=1772218028", "url": "product/mercy-and-meltdowns.html", "price": "₹849" },
+      { "name": "Heart of Virtues", "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/14.png?v=1772192437", "url": "product/heart-of-virtues.html", "price": "₹799" },
+      { "name": "Shravanam to Smaranam", "img": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/48.png?v=1772218159", "url": "product/shravanam-to-smaranam.html", "price": "₹899" }
+    ]
+  }
+}

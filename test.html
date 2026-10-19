@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Shopify Test</h1>
+
+<script>
+const SHOP_URL = "website-3000-namashree.myshopify.com";
+const TOKEN = "04e046afb6cdb1602f3d74fa2adad958";
+
+async function test() {
+  const query = `
+  {
+    products(first: 5) {
+      nodes {
+        title
+      }
+    }
+  }`;
+
+  const response = await fetch(
+    `https://${SHOP_URL}/api/2025-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": TOKEN
+      },
+      body: JSON.stringify({ query })
+    }
+  );
+
+  const data = await response.json();
+  console.log(data);
+}
+
+test();
+</script>
+</body>
+</html>

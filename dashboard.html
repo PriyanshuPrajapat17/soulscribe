@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Space — Soulscribe</title>
+<meta name="description" content="Your personal Soulscribe dashboard — track orders, access masterclass videos, and explore free resources.">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== DASHBOARD STYLES ===== */
+
+  /* Loading Skeleton */
+  .skeleton {
+    background: linear-gradient(90deg, #f0ece4 25%, #faf8f2 50%, #f0ece4 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  /* Hero */
+  .db-hero {
+    background: linear-gradient(135deg, #0d3f5a 0%, #1a6080 50%, #0d3f5a 100%);
+    color: #fff;
+    padding: 4rem 1.5rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .db-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(255,221,79,0.15) 0%, transparent 60%);
+  }
+  .db-hero::after {
+    content: '✦';
+    position: absolute;
+    font-size: 20rem;
+    color: rgba(255,255,255,0.03);
+    top: -4rem;
+    right: -3rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .db-hero-inner { position: relative; z-index: 1; }
+
+  .db-avatar {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffdd4f, #ffc107);
+    color: #0d3f5a;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 4px 16px rgba(255,193,7,0.4);
+    font-family: var(--font-display);
+  }
+  .db-greeting {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-family: var(--font-display);
+    color: #ffdd4f;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+  .db-greeting-sub {
+    font-size: 0.92rem;
+    opacity: 0.65;
+    margin-bottom: 1.5rem;
+  }
+  .db-signout {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.83rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .db-signout:hover { background: rgba(255,255,255,0.2); }
+
+  /* Stats strip */
+  .db-stats {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .db-stat {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 0.75rem 1.2rem;
+    min-width: 100px;
+  }
+  .db-stat-num { font-size: 1.5rem; font-weight: 700; color: #ffdd4f; }
+  .db-stat-label { font-size: 0.72rem; opacity: 0.65; margin-top: 0.1rem; }
+
+  /* Tabs */
+  .db-tabs-wrap {
+    background: var(--background);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    position: sticky;
+    top: 100px;
+    z-index: 40;
+  }
+  .db-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .db-tabs::-webkit-scrollbar { display: none; }
+  .db-tab-btn {
+    flex-shrink: 0;
+    padding: 1rem 1.3rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #0d3f5a;
+    opacity: 0.45;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: opacity 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .db-tab-btn.active { opacity: 1; border-bottom-color: #ffdd4f; }
+  .db-tab-btn:hover { opacity: 0.8; }
+
+  /* Content area */
+  .db-content { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+  .db-pane { display: none; }
+  .db-pane.active { display: block; animation: fadeUp 0.3s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Section heading */
+  .db-section-h { font-size: 1.35rem; font-weight: 700; color: #0d3f5a; margin-bottom: 0.25rem; }
+  .db-section-p { color: #888; font-size: 0.87rem; margin-bottom: 1.8rem; }
+
+  /* Order cards */
+  .order-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .order-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+  .order-img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #f5f0e8; }
+  .order-info { flex: 1; min-width: 0; }
+  .order-name { font-weight: 700; color: #0d3f5a; margin-bottom: 0.2rem; font-size: 0.97rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .order-meta { font-size: 0.8rem; color: #999; margin-top: 0.15rem; }
+  .order-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; flex-wrap: wrap; }
+  .order-action-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    background: none;
+    cursor: pointer;
+    color: #0d3f5a;
+    transition: background 0.15s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .order-action-btn:hover { background: rgba(13,63,90,0.06); }
+
+  .badge {
+    display: inline-block; padding: 0.25rem 0.8rem;
+    border-radius: 999px; font-size: 0.76rem; font-weight: 700;
+    letter-spacing: 0.03em; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-delivered { background: #e8f8ed; color: #1a8a3c; }
+  .badge-transit   { background: #fff8e0; color: #92660a; }
+  .badge-processing{ background: #e8f0ff; color: #2d56a4; }
+  .badge-cancelled { background: #fff1f2; color: #9f1239; }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center; padding: 4rem 2rem;
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .empty-state-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .empty-state h3 { color: #0d3f5a; font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .empty-state p { color: #888; font-size: 0.9rem; }
+
+  /* Shipment Timeline */
+  .track-card {
+    background: linear-gradient(135deg, #fef9e7, #fff8f0);
+    border: 1px solid #ffdd4f50;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .track-card-info .track-title { font-weight: 700; color: #0d3f5a; font-size: 1rem; }
+  .track-card-info .track-id { font-size: 0.8rem; color: #999; margin-top: 0.2rem; }
+  .track-card-info .track-eta { font-size: 0.85rem; color: #0d3f5a; margin-top: 0.4rem; }
+  .track-card-badge { flex-shrink: 0; }
+
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin: 2rem 0 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+  .timeline::-webkit-scrollbar { display: none; }
+  .tl-step { flex: 1; min-width: 90px; display: flex; flex-direction: column; align-items: center; position: relative; }
+  .tl-step:not(:last-child)::after {
+    content: ''; position: absolute; top: 17px; left: 50%;
+    width: 100%; height: 3px; background: #e0d8c8; z-index: 0;
+  }
+  .tl-step.done:not(:last-child)::after { background: linear-gradient(90deg, #ffdd4f, #ffc107); }
+  .tl-dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #e0d8c8; border: 3px solid #e0d8c8;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1; position: relative; margin-bottom: 0.6rem;
+    transition: all 0.3s; font-size: 0.85rem;
+  }
+  .tl-step.done .tl-dot { background: #ffdd4f; border-color: #ffdd4f; color: #0d3f5a; }
+  .tl-step.active .tl-dot { background: #fff; border-color: #0d3f5a; color: #0d3f5a; box-shadow: 0 0 0 5px rgba(13,63,90,0.1); }
+  .tl-label { font-size: 0.75rem; font-weight: 600; color: #aaa; text-align: center; }
+  .tl-step.done .tl-label, .tl-step.active .tl-label { color: #0d3f5a; }
+  .tl-sub { font-size: 0.68rem; color: #bbb; text-align: center; margin-top: 0.15rem; }
+  .tl-step.done .tl-sub { color: #1a8a3c; }
+
+  /* Masterclass */
+  .mc-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .mc-video-wrap { position: relative; padding-bottom: 56.25%; background: #0d3f5a; }
+  .mc-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+  .mc-info { padding: 1.5rem; }
+  .mc-tag {
+    display: inline-block; background: #fef3c7; color: #92660a;
+    font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.7rem;
+    border-radius: 999px; margin-bottom: 0.6rem; letter-spacing: 0.05em;
+  }
+  .mc-title { font-weight: 700; color: #0d3f5a; font-size: 1.1rem; margin-bottom: 0.4rem; }
+  .mc-desc { font-size: 0.88rem; color: #666; line-height: 1.6; }
+
+  /* Resources */
+  .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem; }
+  .res-card {
+    background: #fff; border-radius: 14px; padding: 1.4rem 1.2rem;
+    text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .res-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+  .res-icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .res-name { font-weight: 700; color: #0d3f5a; font-size: 0.9rem; }
+  .res-type { font-size: 0.73rem; color: #aaa; }
+  .res-dl-btn { margin-top: 0.3rem; background: #ffdd4f; color: #0d3f5a; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.85rem; border-radius: 999px; }
+
+  /* Suggested products */
+  .suggested-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.2rem; }
+  .db-divider { border: none; border-top: 1px solid rgba(0,0,0,0.06); margin: 3rem 0 2.5rem; }
+  .db-section-title { font-family: var(--font-display); font-size: 1.8rem; color: #0d3f5a; margin-bottom: 0.25rem; }
+  .db-section-sub { color: #888; margin-bottom: 1.5rem; font-size: 0.88rem; }
+
+  /* FAB */
+  .fab {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 9000;
+    background: linear-gradient(135deg, #ffdd4f, #ffc107);
+    color: #0d3f5a; font-weight: 700; font-size: 0.88rem;
+    padding: 0.85rem 1.4rem; border-radius: 999px; border: none;
+    cursor: pointer; box-shadow: 0 6px 24px rgba(255,193,7,0.45);
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    animation: floatBob 3s ease-in-out infinite;
+  }
+  .fab:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 32px rgba(255,193,7,0.55); animation: none; }
+  @keyframes floatBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* Auth guard overlay */
+  #auth-guard { display: none; position: fixed; inset: 0; background: #fffff9; z-index: 9999; align-items: center; justify-content: center; text-align: center; font-family: var(--font-display); color: #0d3f5a; }
+  #auth-guard.show { display: flex; flex-direction: column; gap: 1rem; }
+  #auth-guard .ag-logo { font-size: 3rem; }
+  #auth-guard p { font-size: 1.1rem; opacity: 0.7; }
+
+  @media (max-width: 640px) {
+    .order-card { flex-wrap: wrap; }
+    .badge { margin-top: 0.5rem; }
+    .db-stats { gap: 0.6rem; }
+    .db-stat { min-width: 80px; padding: 0.6rem 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Auth guard (shown while checking token) -->
+<div id="auth-guard" class="show">
+  <div class="ag-logo">✦</div>
+  <h2 style="font-size:1.6rem;">Loading your soul space…</h2>
+  <p>Checking your session</p>
+</div>
+
+<div class="sticky-top">
+  <div class="announce"><a href="rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="shop.html">Shop</a>
+    <a href="journaling-journeys.html">Journaling Journeys</a>
+    <a href="experiences.html">Immersions</a>
+    <a href="rise-collective.html">The RISE Collective</a>
+    <a href="nectar-for-soul.html">Nectar for the soul</a>
+    <a href="behind-the-bliss.html">Behind the Bliss</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+  <div class="drawer-foot"><p>Journal back to bliss.</p><p>A gentle space to pause, reflect &amp; write.</p></div>
+</aside>
+
+<main id="main-content" style="display:none;">
+
+  <!-- HERO -->
+  <div class="db-hero">
+    <div class="db-hero-inner">
+      <div class="db-avatar" id="db-avatar">✦</div>
+      <p class="db-greeting" id="db-greeting">Your soul space ✦</p>
+      <p class="db-greeting-sub" id="db-phone-display"></p>
+      <a href="#" class="db-signout" id="signout-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign out
+      </a>
+      <div class="db-stats" id="db-stats">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="db-tabs-wrap">
+    <div class="db-tabs" role="tablist">
+      <button class="db-tab-btn active" data-tab="orders">📦 Orders</button>
+      <button class="db-tab-btn" data-tab="track">🚚 Track Shipment</button>
+      <button class="db-tab-btn" data-tab="masterclass">🎬 Masterclass</button>
+      <button class="db-tab-btn" data-tab="resources">✨ Free Resources</button>
+    </div>
+  </div>
+
+  <!-- TAB CONTENT -->
+  <div class="db-content">
+
+    <!-- ORDERS -->
+    <div class="db-pane active" id="pane-orders">
+      <h2 class="db-section-h">Your Orders</h2>
+      <p class="db-section-p">A soulful record of your journey so far.</p>
+      <div id="orders-list">
+        <!-- Skeleton loader -->
+        <div class="order-card"><div class="skeleton order-img"></div><div class="order-info"><div class="skeleton" style="height:16px;width:60%;margin-bottom:8px;"></div><div class="skeleton" style="height:12px;width:40%;"></div></div></div>
+        <div class="order-card"><div class="skeleton order-img"></div><div class="order-info"><div class="skeleton" style="height:16px;width:70%;margin-bottom:8px;"></div><div class="skeleton" style="height:12px;width:45%;"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TRACK -->
+    <div class="db-pane" id="pane-track">
+      <h2 class="db-section-h">Track Your Shipment</h2>
+      <p class="db-section-p">Your soul kit is on its way 🙏</p>
+      <div id="track-content">
+        <div class="skeleton" style="height:100px;margin-bottom:1.5rem;border-radius:14px;"></div>
+        <div class="skeleton" style="height:80px;border-radius:14px;"></div>
+      </div>
+    </div>
+
+    <!-- MASTERCLASS -->
+    <div class="db-pane" id="pane-masterclass">
+      <h2 class="db-section-h">Exclusive Masterclass</h2>
+      <p class="db-section-p">Unlock the full depth of your journaling practice.</p>
+      <div id="masterclass-content">
+        <div class="skeleton" style="padding-bottom:56.25%;border-radius:16px;margin-bottom:1.5rem;"></div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="db-pane" id="pane-resources">
+      <h2 class="db-section-h">Free Resources for You ✦</h2>
+      <p class="db-section-p">Thoughtfully curated gifts from the Soulscribe family.</p>
+      <div class="res-grid" id="resources-content">
+        <div class="skeleton" style="height:180px;border-radius:14px;"></div>
+        <div class="skeleton" style="height:180px;border-radius:14px;"></div>
+        <div class="skeleton" style="height:180px;border-radius:14px;"></div>
+      </div>
+    </div>
+
+    <!-- SUGGESTED (always visible) -->
+    <hr class="db-divider">
+    <h2 class="db-section-title">Souls also love ✦</h2>
+    <p class="db-section-sub">Explore more from the Soulscribe family</p>
+    <div class="suggested-grid" id="suggested-grid">
+      <div class="skeleton" style="height:260px;border-radius:14px;"></div>
+      <div class="skeleton" style="height:260px;border-radius:14px;"></div>
+      <div class="skeleton" style="height:260px;border-radius:14px;"></div>
+      <div class="skeleton" style="height:260px;border-radius:14px;"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="experiences.html">Immersions</a></li>
+            <li><a href="rise-collective.html">The RISE Collective</a></li>
+            <li><a href="nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+            <li><a href="terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<a class="fab" href="index.html#quiz" id="fab-btn" style="display:none;">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Take the Soul Quiz
+</a>
+
+<script src="main.js"></script>
+<script>
+  const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port === '8080'
+    ? 'http://localhost:3001'
+    : '';
+
+  // ─── AUTH GUARD ──────────────────────────────────────────────────────────────
+  async function initDashboard() {
+    const token = localStorage.getItem('ss_token');
+
+    if (!token) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/api/me`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (res.status === 401) {
+        localStorage.removeItem('ss_token');
+        localStorage.removeItem('ss_phone');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (!res.ok) throw new Error('Server error');
+
+      const user = await res.json();
+      renderDashboard(user);
+
+    } catch (err) {
+      console.error('Dashboard error:', err);
+      // Show fallback message if server not reachable
+      document.getElementById('auth-guard').innerHTML = `
+        <div style="max-width:400px;padding:2rem;text-align:center;">
+          <div style="font-size:3rem;margin-bottom:1rem;">⚠️</div>
+          <h2 style="font-size:1.3rem;margin-bottom:0.5rem;color:#0d3f5a;">Server not running</h2>
+          <p style="color:#888;font-size:0.9rem;margin-bottom:1.5rem;">Please start the backend server first:</p>
+          <code style="background:#f0ece4;padding:0.75rem 1rem;border-radius:8px;display:block;font-size:0.85rem;color:#0d3f5a;margin-bottom:1.5rem;">
+            cd server<br>node server.js
+          </code>
+          <a href="login.html" style="color:#0d3f5a;font-weight:600;text-decoration:underline;">← Back to Login</a>
+        </div>
+      `;
+    }
+  }
+
+  function renderDashboard(user) {
+    // Hide guard, show content
+    document.getElementById('auth-guard').classList.remove('show');
+    document.getElementById('main-content').style.display = 'block';
+    document.getElementById('site-footer').style.display = 'block';
+    document.getElementById('fab-btn').style.display = 'flex';
+
+    // Hero
+    const initials = user.name ? user.name.charAt(0).toUpperCase() : '✦';
+    document.getElementById('db-avatar').textContent = initials;
+    document.getElementById('db-greeting').textContent = `Welcome back, ${user.name || 'Soulful One'} ✦`;
+    document.getElementById('db-phone-display').textContent = `+91 ${user.phone} · Member since ${new Date(user.createdAt).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}`;
+
+    // Stats
+    const delivered = (user.orders || []).filter(o => o.status === 'delivered').length;
+    const inTransit = (user.orders || []).filter(o => o.status === 'transit').length;
+    document.getElementById('db-stats').innerHTML = `
+      <div class="db-stat"><div class="db-stat-num">${user.orders.length}</div><div class="db-stat-label">Total Orders</div></div>
+      <div class="db-stat"><div class="db-stat-num">${delivered}</div><div class="db-stat-label">Delivered</div></div>
+      <div class="db-stat"><div class="db-stat-num">${inTransit}</div><div class="db-stat-label">In Transit</div></div>
+      <div class="db-stat"><div class="db-stat-num">${(user.resources || []).length}</div><div class="db-stat-label">Resources</div></div>
+    `;
+
+    // Render all tabs
+    renderOrders(user.orders || []);
+    renderTracking(user.orders || []);
+    renderMasterclass(user.masterclass || []);
+    renderResources(user.resources || []);
+    renderSuggested(user.suggested || []);
+
+    // Init tab switching
+    initTabs();
+  }
+
+  // ─── ORDERS ─────────────────────────────────────────────────────────────────
+  function renderOrders(orders) {
+    const list = document.getElementById('orders-list');
+    if (!orders.length) {
+      list.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📦</div><h3>No orders yet</h3><p>Your first journal is just a click away.</p><a href="shop.html" class="btn-sun" style="display:inline-flex;margin-top:1rem;">Shop Now</a></div>`;
+      return;
+    }
+    const statusMap = {
+      delivered: '<span class="badge badge-delivered">✓ Delivered</span>',
+      transit:   '<span class="badge badge-transit">→ In Transit</span>',
+      processing:'<span class="badge badge-processing">⧗ Processing</span>',
+      cancelled: '<span class="badge badge-cancelled">✗ Cancelled</span>'
+    };
+    list.innerHTML = orders.map(o => `
+      <div class="order-card">
+        <img class="order-img" src="${o.img}" alt="${o.name}" onerror="this.src='assets/logo.png'" loading="lazy">
+        <div class="order-info">
+          <div class="order-name">${o.name}</div>
+          <div class="order-meta">Order #${o.id} &nbsp;·&nbsp; Placed ${o.placedOn}</div>
+          <div class="order-meta">${o.price} &nbsp;·&nbsp; Qty ${o.qty}</div>
+          <div class="order-actions">
+            <a class="order-action-btn" href="${o.url}">View Product →</a>
+            ${o.status === 'transit' ? `<button class="order-action-btn" onclick="switchTab('track')" style="background:#fff8e0;border-color:#ffc107;color:#92660a;">Track →</button>` : ''}
+          </div>
+        </div>
+        ${statusMap[o.status] || ''}
+      </div>
+    `).join('');
+  }
+
+  // ─── TRACKING ────────────────────────────────────────────────────────────────
+  function renderTracking(orders) {
+    const container = document.getElementById('track-content');
+    const activeOrders = orders.filter(o => o.status === 'transit' && o.trackingSteps);
+
+    if (!activeOrders.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🚚</div><h3>No active shipments</h3><p>Your orders will appear here once they are dispatched.</p></div>`;
+      return;
+    }
+
+    container.innerHTML = activeOrders.map(o => {
+      const steps = o.trackingSteps || [];
+      const stepsHtml = steps.map(s => `
+        <div class="tl-step ${s.done ? 'done' : ''} ${s.active ? 'active' : ''}">
+          <div class="tl-dot">${s.done ? '✓' : s.active ? '→' : ''}</div>
+          <div class="tl-label">${s.label}</div>
+          <div class="tl-sub">${s.sub || ''}</div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="track-card">
+          <div class="track-card-info">
+            <div class="track-title">${o.name}</div>
+            <div class="track-id">Tracking ID: ${o.trackingId}</div>
+            <div class="track-eta">Estimated: <strong>${o.estimatedDelivery || 'TBD'}</strong></div>
+          </div>
+          <span class="badge badge-transit">→ In Transit</span>
+        </div>
+        <div class="timeline">${stepsHtml}</div>
+        <div style="background:#fff;border-radius:12px;padding:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.05);margin-bottom:2rem;">
+          <p style="font-weight:700;color:#0d3f5a;margin-bottom:0.4rem;">Latest Update</p>
+          <p style="color:#666;font-size:0.88rem;line-height:1.6;">Your package has been picked up and is en route to your city. You'll receive a delivery confirmation once it arrives. ✦</p>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // ─── MASTERCLASS ─────────────────────────────────────────────────────────────
+  function renderMasterclass(items) {
+    const container = document.getElementById('masterclass-content');
+    if (!items.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">🎬</div><h3>Coming soon</h3><p>Exclusive masterclass videos will appear here once you place an order.</p></div>`;
+      return;
+    }
+    container.innerHTML = items.map(mc => `
+      <div class="mc-card">
+        <div class="mc-video-wrap">
+          <iframe src="https://www.youtube.com/embed/${mc.youtubeId}" title="${mc.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="mc-info">
+          <span class="mc-tag">${mc.tag}</span>
+          <div class="mc-title">${mc.title}</div>
+          <div class="mc-desc">${mc.desc}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ─── RESOURCES ───────────────────────────────────────────────────────────────
+  function renderResources(items) {
+    const container = document.getElementById('resources-content');
+    if (!items.length) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">✨</div><h3>No resources yet</h3><p>Free resources will be unlocked after your first order.</p></div>`;
+      return;
+    }
+    container.innerHTML = items.map(r => `
+      <a class="res-card" href="#" onclick="return false;" title="${r.name}">
+        <div class="res-icon" style="background:${r.color}">${r.icon}</div>
+        <div class="res-name">${r.name}</div>
+        <div class="res-type">${r.type}</div>
+        <span class="res-dl-btn">↓ Download</span>
+      </a>
+    `).join('');
+  }
+
+  // ─── SUGGESTED ───────────────────────────────────────────────────────────────
+  function renderSuggested(items) {
+    const grid = document.getElementById('suggested-grid');
+    if (!items.length) { grid.innerHTML = ''; return; }
+    grid.innerHTML = items.map(p => `
+      <div class="product-card">
+        <a class="img" href="${p.url}">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='assets/logo.png'">
+        </a>
+        <div class="product-card-info">
+          <h3><a href="${p.url}">${p.name}</a></h3>
+          <p class="price">${p.price}</p>
+          <a href="${p.url}" class="btn-yellow-gradient" style="text-decoration:none;margin-top:0.5rem;display:inline-flex;border-radius:999px;">Explore →</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ─── TABS ────────────────────────────────────────────────────────────────────
+  function initTabs() {
+    document.querySelectorAll('.db-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+  }
+
+  function switchTab(target) {
+    document.querySelectorAll('.db-tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === target);
+    });
+    document.querySelectorAll('.db-pane').forEach(p => {
+      p.classList.toggle('active', p.id === `pane-${target}`);
+    });
+    // Scroll tabs bar into view
+    document.querySelector(`.db-tab-btn[data-tab="${target}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  // ─── SIGN OUT ────────────────────────────────────────────────────────────────
+  document.getElementById('signout-btn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('ss_token');
+    if (token) {
+      try { await fetch(`${API_BASE}/api/logout`, { method: 'POST', headers: { 'Authorization': `Bearer ${token}` } }); } catch {}
+    }
+    localStorage.removeItem('ss_token');
+    localStorage.removeItem('ss_phone');
+    localStorage.removeItem('ss_name');
+    window.location.href = 'login.html';
+  });
+
+  // ─── INIT ────────────────────────────────────────────────────────────────────
+  initDashboard();
+</script>
+</body>
+</html>

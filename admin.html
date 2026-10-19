@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Portal — Soulscribe</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .admin-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .admin-header {
+    background: linear-gradient(135deg, #0d3f5a 0%, #1a6080 100%);
+    color: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px rgba(13,63,90,0.15);
+  }
+  .admin-header h1 {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: #ffdd4f;
+    margin-bottom: 0.25rem;
+  }
+  .admin-header p {
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+  .admin-tabs {
+    display: flex;
+    gap: 0.75rem;
+    border-bottom: 2px solid rgba(13,63,90,0.1);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+  }
+  .admin-tab {
+    background: none;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0d3f5a;
+    opacity: 0.6;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .admin-tab.active {
+    opacity: 1;
+    border-bottom-color: #ffdd4f;
+    color: #0d3f5a;
+  }
+  .admin-card {
+    background: #ffffff;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid rgba(13,63,90,0.08);
+    margin-bottom: 2rem;
+  }
+  .admin-card-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: #0d3f5a;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .actions-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .btn-sm {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s, background 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .btn-sm:hover { transform: translateY(-1px); }
+  .btn-blue { background: #0d3f5a; color: #fff; }
+  .btn-yellow { background: #ffdd4f; color: #0d3f5a; }
+  .btn-red { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+  .btn-outline-sm { background: transparent; border: 1.5px solid #0d3f5a; color: #0d3f5a; }
+  
+  /* Table styling */
+  .table-responsive {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  table.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+  table.admin-table th {
+    background: #f8fafc;
+    color: #0d3f5a;
+    font-weight: 700;
+    padding: 0.9rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+  }
+  table.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+  }
+  table.admin-table tr:hover td {
+    background: #fdfdf9;
+  }
+  .reorder-btns {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .reorder-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #0d3f5a;
+  }
+  .reorder-btn:hover { background: #ffdd4f; }
+  
+  .email-preview-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    color: #1e293b;
+    margin-top: 1rem;
+    white-space: pre-wrap;
+  }
+  .badge-count {
+    background: #ffdd4f;
+    color: #0d3f5a;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="sticky-top">
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="btn-sm btn-yellow" href="journaling-journeys.html" target="_blank">View Live Journeys ↗</a>
+      <a class="icon-btn" href="dashboard.html" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    </div>
+  </div>
+</div>
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="admin.html">Admin Portal</a>
+    <a href="shop.html">Shop</a>
+    <a href="journaling-journeys.html">Journaling Journeys</a>
+    <a href="experiences.html">Immersions</a>
+    <a href="rise-collective.html">The RISE Collective</a>
+    <a href="nectar-for-soul.html">Nectar for the soul</a>
+    <a href="behind-the-bliss.html">Behind the Bliss</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+</aside>
+
+<main class="admin-wrap">
+
+  <div class="admin-header">
+    <div>
+      <h1>Soulscribe Admin Controls</h1>
+      <p>Manage Journaling Journeys, moderate customer submissions, reorder live grid, and view email flows.</p>
+    </div>
+    <div class="actions-row">
+      <button class="btn-sm btn-yellow" onclick="exportCSV()">📥 Export Excel / Dataverse CSV</button>
+      <button class="btn-sm btn-blue" onclick="saveAndSyncLive()">💾 Save & Sync Changes</button>
+    </div>
+  </div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('testimonials', this)">Journaling Journeys (<span id="tab-count-jj">13</span>/16)</button>
+    <button class="admin-tab" onclick="switchTab('submissions', this)">Form Submissions (<span id="tab-count-sub">0</span>)</button>
+    <button class="admin-tab" onclick="switchTab('emails', this)">Post-Purchase & Emails</button>
+  </div>
+
+  <!-- TAB 1: JOURNALING JOURNEYS -->
+  <section id="panel-testimonials" class="admin-panel">
+    <div class="admin-card">
+      <div class="admin-card-title">
+        <div>
+          Live Grid Testimonials 
+          <span class="badge-count" id="grid-capacity-badge">13 / 16 Maximum</span>
+        </div>
+        <div class="actions-row">
+          <button class="btn-sm btn-outline-sm" onclick="toggleAddModal()">+ Add New Testimonial</button>
+          <button class="btn-sm btn-yellow" onclick="exportCSV()">Export to CSV</button>
+        </div>
+      </div>
+      <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 1rem;">
+        Grid displays top-to-bottom in this exact order (max 16). Use <strong>↑</strong> and <strong>↓</strong> buttons to reorder entries. When a 17th is submitted by users, the oldest (bottom) is automatically removed.
+      </p>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">Order</th>
+              <th>Customer</th>
+              <th>Practice</th>
+              <th>Story</th>
+              <th>Date</th>
+              <th style="width: 140px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="testimonials-tbody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Quick Add Testimonial Form Card -->
+    <div class="admin-card" id="add-testimonial-card" style="display:none;">
+      <div class="admin-card-title">Add Testimonial Directly</div>
+      <form id="admin-add-form" onsubmit="adminAddTestimonial(event)">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:#0d3f5a;">Name*</label>
+            <input type="text" id="adm-name" required placeholder="Radhika Sharma" style="width:100%; padding:0.6rem; border:1px solid #cbd5e1; border-radius:8px; margin-top:0.3rem;">
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:#0d3f5a;">Practice*</label>
+            <input type="text" id="adm-practice" required placeholder="Gratitude Journaling" style="width:100%; padding:0.6rem; border:1px solid #cbd5e1; border-radius:8px; margin-top:0.3rem;">
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:#0d3f5a;">Email (Optional)</label>
+            <input type="email" id="adm-email" placeholder="radhika@example.com" style="width:100%; padding:0.6rem; border:1px solid #cbd5e1; border-radius:8px; margin-top:0.3rem;">
+          </div>
+          <div>
+            <label style="font-size:0.85rem; font-weight:700; color:#0d3f5a;">Image Path (Optional)</label>
+            <input type="text" id="adm-image" placeholder="assets/review-1.jpg" style="width:100%; padding:0.6rem; border:1px solid #cbd5e1; border-radius:8px; margin-top:0.3rem;">
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size:0.85rem; font-weight:700; color:#0d3f5a;">Story*</label>
+          <textarea id="adm-story" required rows="3" placeholder="Share the journaling experience…" style="width:100%; padding:0.6rem; border:1px solid #cbd5e1; border-radius:8px; margin-top:0.3rem;"></textarea>
+        </div>
+        <div class="actions-row">
+          <button type="submit" class="btn-sm btn-yellow">Add to Top of Grid</button>
+          <button type="button" class="btn-sm btn-outline-sm" onclick="toggleAddModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- TAB 2: ALL SUBMISSIONS -->
+  <section id="panel-submissions" class="admin-panel" style="display:none;">
+    <div class="admin-card">
+      <div class="admin-card-title">
+        <div>All Incoming Form Submissions</div>
+        <button class="btn-sm btn-yellow" onclick="exportSubmissionsCSV()">Export Submissions CSV</button>
+      </div>
+      <p style="font-size: 0.88rem; color: #64748b; margin-bottom: 1rem;">
+        Persistent archive of all form submissions across Connect, RISE Collective, Immersion Hosts, and Journaling Journeys.
+      </p>
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Form Type</th>
+              <th>Contact / Name</th>
+              <th>Details / Message</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="submissions-tbody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: POST PURCHASE & EMAILS -->
+  <section id="panel-emails" class="admin-panel" style="display:none;">
+    <div class="admin-card">
+      <div class="admin-card-title">
+        <div>Post-Purchase Email #1: Welcome Email</div>
+        <span class="badge-count">Trigger: Immediate Post-Purchase</span>
+      </div>
+      <div style="margin-bottom:0.5rem; font-weight:700; color:#0d3f5a;">
+        Subject: <span style="font-weight:400; color:#1e293b;">Your Soulscribe journey begins here</span>
+      </div>
+      <div class="email-preview-box" id="welcome-email-preview">Hi there,
+
+Thank you for your order.
+We're truly grateful you've chosen to invite Soulscribe into your journey.
+We hope what you've received becomes more than just a journal—it becomes a quiet space where you can slow down, reflect, and gently reconnect with yourself and with God.
+
+Over the coming days, don't worry about writing perfectly. Just begin.
+One honest page is enough.
+
+As a welcome gift, we'd also love to invite you to our small WhatsApp Circle, where we share:
+• Daily wisdom shots
+• Monthly journaling journeys
+• Gentle reflection activities
+• Early access to new resources and immersions
+
+Simply reply to this email if you'd like to join—we'd be delighted to welcome you.
+
+If you ever have a question or simply want to share a page that touched your heart, just hit reply. We read every message.
+
+Thank you for trusting us with a small part of your spiritual journey.
+
+With gratitude,
+The Soulscribe fam:)</div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-title">
+        <div>Post-Purchase Email #2: Order Confirmation & Invoice</div>
+        <span class="badge-count">Trigger: Immediate Post-Purchase</span>
+      </div>
+      <div style="margin-bottom:0.5rem; font-weight:700; color:#0d3f5a;">
+        Subject: <span style="font-weight:400; color:#1e293b;">Order Confirmed — Your Soulscribe companion is on its way 🌸</span>
+      </div>
+      <div class="email-preview-box">Hi there,
+
+Your order has been confirmed and is being packed with care and intention.
+
+We craft every order with love and usually ship within 2 working days. Delivery takes 5–7 days within India, and 8–10 days worldwide.
+
+You can track your order anytime from Your Space dashboard at www.soulscribe.in/dashboard.html.
+
+With gratitude,
+The Soulscribe fam:)</div>
+    </div>
+  </section>
+
+</main>
+
+<script src="main.js"></script>
+<script>
+  // ─── ADMIN PORTAL LOGIC ───────────────────────────────────────────────────────
+  const SEED = [
+    { id: "jj-1", name: "Priya", date: "24/06/25", practice: "Gratitude journaling", stars: 5, image: "assets/cd286d5956113bc39e40f45956aada9c.jpg", story: "Finally holding Mercy & Meltdowns in my hands! A truly beautiful journaling experience that speaks straight to the soul. Thank you for this masterpiece! 🌸" },
+    { id: "jj-2", name: "Sharon", date: "20/06/25", practice: "Daily planning", stars: 5, image: "assets/review-1.jpg", story: "Got the planner… much better than I imagined. I already love using it. Continue your good work 🌼" },
+    { id: "jj-3", name: "R.", date: "20/06/25", practice: "Undated planning", stars: 5, image: "", story: "Hey, I have purchased your undated planner. I just got my planner just now… how cute and pretty it is! I just can't wait to use it… thank you ❤️. This planner has my whole heart. Thank you so much for adding those extras like cute stuffs too… I'm loving it 🌟" },
+    { id: "jj-4", name: "Isha", date: "20/06/25", practice: "Mindful journaling", stars: 5, image: "assets/review-2.jpg", story: "OMGGGGGG, this is the most beautiful planner I have ever seen! Thank you so much guys! You made my day 💛" },
+    { id: "jj-5", name: "Lekha K", date: "20/06/25", practice: "Self reflection", stars: 5, image: "", story: "It's cute, purposeful, and has so many sections to fill. Absolutely loved it. It's aesthetically pleasing, the pages are such that no part of the ink line markers or a squiggle outline seep through the page. So overall a great buy guys!" },
+    { id: "jj-6", name: "Ankita Sharma", date: "20/06/25", practice: "Spiritual journaling", stars: 5, image: "assets/review-3.jpg", story: "Got my gorgeous planner this morning 🌞. The planner is so aesthetic and beautiful and so very pretty that I don't even wanna ruin it by writing anything 😍🌸" },
+    { id: "jj-7", name: "Konika", date: "20/06/25", practice: "Daily Prioritizer", stars: 5, image: "", story: "Amazinggg pattern looks simple yet so useful. Would always say those huge planners are not me and quite sure I will use it many sections. Thank you!!" },
+    { id: "jj-8", name: "Praajal", date: "20/06/25", practice: "Gratitude Companion", stars: 5, image: "", story: "This daily planners too cute to handle 💛💛. The stickers you sent are absolutely adorable and I loved the bookmarks and mini calendars too. Everything is so very thoughtfully packed. Totally made my day 🌼" },
+    { id: "jj-9", name: "Sashi", date: "20/06/25", practice: "Morning Pages", stars: 5, image: "assets/review-4.jpg", story: "Simply lovely. Soft pages, gentle prompts and a calming aesthetic. It has become my morning ritual." },
+    { id: "jj-10", name: "Devika", date: "21/06/25", practice: "Mindful reflection", stars: 5, image: "", story: "The little nudges every morning are exactly what my routine was missing. Highly recommend." },
+    { id: "jj-11", name: "Arvind", date: "22/06/25", practice: "Prayer journaling", stars: 5, image: "assets/review-5.jpg", story: "Beautifully made — the binding lays flat and the paper feels lovely under any pen." },
+    { id: "jj-12", name: "Meera", date: "22/06/25", practice: "Pause & Ponder", stars: 5, image: "", story: "A quiet companion for chaotic days. Each section feels intentional and warm." },
+    { id: "jj-13", name: "Tanmay", date: "23/06/25", practice: "Soulful Saturdays", stars: 5, image: "", story: "Gift-wrapped beautifully. My sister was over the moon. Thank you for the personal touch!" }
+  ];
+
+  let adminTestimonials = [];
+  let adminSubmissions = [];
+
+  function getLocalTestimonials() {
+    try {
+      const stored = localStorage.getItem('soulscribe_testimonials');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e){}
+    return [...SEED];
+  }
+
+  async function loadData() {
+    adminTestimonials = getLocalTestimonials();
+    renderTestimonialsTable();
+
+    try {
+      const res = await fetch('/api/testimonials');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.testimonials && Array.isArray(data.testimonials)) {
+          adminTestimonials = data.testimonials;
+          localStorage.setItem('soulscribe_testimonials', JSON.stringify(adminTestimonials));
+          renderTestimonialsTable();
+        }
+      }
+    } catch(e){}
+
+    try {
+      const subRes = await fetch('/api/admin/submissions');
+      if (subRes.ok) {
+        const subData = await subRes.json();
+        adminSubmissions = subData.submissions || [];
+        renderSubmissionsTable();
+      }
+    } catch(e){}
+  }
+
+  function renderTestimonialsTable() {
+    const tbody = document.getElementById('testimonials-tbody');
+    const badge = document.getElementById('grid-capacity-badge');
+    const tabCount = document.getElementById('tab-count-jj');
+    if (!tbody) return;
+
+    if (badge) badge.textContent = `${adminTestimonials.length} / 16 Maximum`;
+    if (tabCount) tabCount.textContent = adminTestimonials.length;
+
+    tbody.innerHTML = '';
+    adminTestimonials.forEach((item, idx) => {
+      const tr = document.createElement('tr');
+      const hasImg = item.image ? `<span title="${item.image}">🖼️</span>` : '';
+      tr.innerHTML = `
+        <td>
+          <div style="display:flex; align-items:center; gap:0.4rem;">
+            <strong>#${idx + 1}</strong>
+            <div class="reorder-btns">
+              <button class="reorder-btn" onclick="moveItem(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button class="reorder-btn" onclick="moveItem(${idx}, 1)" ${idx === adminTestimonials.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+            </div>
+          </div>
+        </td>
+        <td><strong>${item.name}</strong> ${hasImg}</td>
+        <td><span style="background:#f1f5f9; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.8rem;">${item.practice || 'Journaling'}</span></td>
+        <td style="max-width:380px;"><div style="overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">${item.story}</div></td>
+        <td style="white-space:nowrap; color:#64748b;">${item.date || ''}</td>
+        <td>
+          <button class="btn-sm btn-red" onclick="adminDeleteItem('${item.id}')">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function moveItem(idx, direction) {
+    const targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= adminTestimonials.length) return;
+
+    const temp = adminTestimonials[idx];
+    adminTestimonials[idx] = adminTestimonials[targetIdx];
+    adminTestimonials[targetIdx] = temp;
+
+    saveAndSyncLive(false);
+    renderTestimonialsTable();
+  }
+
+  function adminDeleteItem(id) {
+    if (!confirm('Are you sure you want to remove this story?')) return;
+    adminTestimonials = adminTestimonials.filter(t => t.id !== id);
+    saveAndSyncLive(false);
+    renderTestimonialsTable();
+
+    try {
+      fetch(`/api/admin/testimonials/${id}`, { method: 'DELETE' });
+    } catch(e){}
+  }
+
+  function toggleAddModal() {
+    const el = document.getElementById('add-testimonial-card');
+    if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function adminAddTestimonial(e) {
+    e.preventDefault();
+    const name = document.getElementById('adm-name').value.trim();
+    const practice = document.getElementById('adm-practice').value.trim();
+    const email = document.getElementById('adm-email').value.trim();
+    const image = document.getElementById('adm-image').value.trim();
+    const story = document.getElementById('adm-story').value.trim();
+
+    if (!name || !story) return;
+
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    const dateString = `${dd}/${mm}/${String(yyyy).slice(-2)}`;
+
+    const newEntry = {
+      id: 'jj-' + Date.now(),
+      name,
+      email,
+      practice,
+      image,
+      story,
+      stars: 5,
+      date: dateString,
+      createdAt: new Date().toISOString()
+    };
+
+    // Prepend to top
+    adminTestimonials.unshift(newEntry);
+    if (adminTestimonials.length > 16) {
+      adminTestimonials = adminTestimonials.slice(0, 16);
+    }
+
+    saveAndSyncLive(true);
+    renderTestimonialsTable();
+    toggleAddModal();
+    document.getElementById('admin-add-form').reset();
+  }
+
+  async function saveAndSyncLive(showToast = true) {
+    localStorage.setItem('soulscribe_testimonials', JSON.stringify(adminTestimonials));
+    try {
+      await fetch('/api/admin/testimonials/reorder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ testimonials: adminTestimonials })
+      });
+      if (showToast) alert('✅ Changes saved & synchronized live!');
+    } catch(e) {
+      if (showToast) alert('✅ Changes saved to local storage!');
+    }
+  }
+
+  function exportCSV() {
+    const headers = ['Order', 'ID', 'Name', 'Email', 'Practice', 'Date', 'Stars', 'Story', 'Image'];
+    const rows = adminTestimonials.map((t, idx) => [
+      idx + 1,
+      `"${t.id || ''}"`,
+      `"${(t.name || '').replace(/"/g, '""')}"`,
+      `"${(t.email || '').replace(/"/g, '""')}"`,
+      `"${(t.practice || '').replace(/"/g, '""')}"`,
+      `"${t.date || ''}"`,
+      `"${t.stars || 5}"`,
+      `"${(t.story || '').replace(/"/g, '""')}"`,
+      `"${t.image || ''}"`
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `Soulscribe_Journaling_Journeys_Admin_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function renderSubmissionsTable() {
+    const tbody = document.getElementById('submissions-tbody');
+    const countEl = document.getElementById('tab-count-sub');
+    if (!tbody) return;
+    if (countEl) countEl.textContent = adminSubmissions.length;
+
+    tbody.innerHTML = '';
+    if (adminSubmissions.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:2rem;">No form submissions recorded yet.</td></tr>`;
+      return;
+    }
+
+    adminSubmissions.slice().reverse().forEach(sub => {
+      const tr = document.createElement('tr');
+      const dateStr = sub.submittedAt ? new Date(sub.submittedAt).toLocaleDateString() : '';
+      const d = sub.data || {};
+      const contact = d.name || d.email || d.phone || 'Anonymous';
+      const detailStr = Object.entries(d).map(([k, v]) => `${k}: ${v}`).join(' | ');
+
+      tr.innerHTML = `
+        <td style="white-space:nowrap; color:#64748b;">${dateStr}</td>
+        <td><span style="background:#e0f2fe; color:#0369a1; padding:0.2rem 0.6rem; border-radius:4px; font-weight:700; font-size:0.8rem;">${sub.formType || 'General'}</span></td>
+        <td><strong>${contact}</strong></td>
+        <td style="max-width:400px; font-size:0.82rem;"><div style="overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">${detailStr}</div></td>
+        <td>
+          <button class="btn-sm btn-red" onclick="deleteSubmission('${sub.id}')">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function deleteSubmission(id) {
+    if (!confirm('Remove submission?')) return;
+    adminSubmissions = adminSubmissions.filter(s => s.id !== id);
+    renderSubmissionsTable();
+    try {
+      await fetch(`/api/admin/journey-entry/${id}`, { method: 'DELETE' });
+    } catch(e){}
+  }
+
+  function exportSubmissionsCSV() {
+    const headers = ['ID', 'Date', 'Form Type', 'Data Payload'];
+    const rows = adminSubmissions.map(s => [
+      `"${s.id}"`,
+      `"${s.submittedAt || ''}"`,
+      `"${s.formType || ''}"`,
+      `"${JSON.stringify(s.data || {}).replace(/"/g, '""')}"`
+    ]);
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const link = document.createElement('a');
+    link.setAttribute('href', encodeURI(csvContent));
+    link.setAttribute('download', `Soulscribe_All_Submissions_${new Date().toISOString().slice(0,10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.admin-panel').forEach(p => p.style.display = 'none');
+    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+    const target = document.getElementById(`panel-${tabId}`);
+    if (target) target.style.display = 'block';
+    if (btn) btn.classList.add('active');
+  }
+
+  document.addEventListener('DOMContentLoaded', loadData);
+</script>
+
+</body>
+</html>

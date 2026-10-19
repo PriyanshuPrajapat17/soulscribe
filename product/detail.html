@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Details — Soulscribe</title>
+<meta name="description" content="Nurturing details of your soulful practice. A gentle space to look back and thank the Lord.">
+<link rel="icon" href="../assets/logo.png">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  /* Loading state spinner */
+  .loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: 1.5rem;
+    color: var(--teal-accent);
+  }
+  .spinner {
+    width: 3rem;
+    height: 3rem;
+    border: 4px solid var(--sun-soft);
+    border-top: 4px solid var(--teal-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+<div class="sticky-top">
+  <div class="announce"><a href="../rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="../index.html"><img src="../assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="../login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="../index.html"><img src="../assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="../shop.html">Shop</a>
+    <a href="../journaling-journeys.html">Journaling Journeys</a>
+    <a href="../experiences.html">Immersions</a>
+    <a href="../rise-collective.html">The RISE Collective</a>
+    <a href="../nectar-for-soul.html">Nectar for the soul</a>
+    <a href="../behind-the-bliss.html">Behind the Bliss</a>
+    <a href="../connect.html">Connect</a>
+  </nav>
+  <div class="drawer-foot"><p>Journal back to bliss.</p><p>A gentle space to pause, reflect &amp; write.</p></div>
+</aside>
+
+<main id="main-content">
+  <!-- Dynamic loader initially -->
+  <div class="loader-container" id="loader">
+    <div class="spinner"></div>
+    <p style="font-family: var(--font-display); font-size: 1.25rem;">Fetching details of your practice...</p>
+  </div>
+
+  <article class="hidden" id="product-container">
+    <div class="wrap">
+      <div class="pd-grid">
+        <div class="pd-gallery" id="image-gallery">
+          <!-- Images injected here -->
+        </div>
+        <aside class="pd-info reveal in">
+          <h1 id="product-title">Product Title</h1>
+          <p class="tagline" id="product-tagline">Nurturing your spiritual habit.</p>
+          <p class="pd-price" id="product-price">INR 999.00</p>
+          <p class="pd-tax">Tax included.</p>
+          
+          <div style="margin-top:1.5rem">
+            <p style="font-size:0.75rem;letter-spacing:0.1em;color:var(--teal-accent)">QUANTITY</p>
+            <div class="qty" style="margin-top:0.5rem">
+              <button aria-label="decrease" id="qty-dec">−</button>
+              <span id="qty-count">1</span>
+              <button aria-label="increase" id="qty-inc">+</button>
+            </div>
+          </div>
+          
+          <div style="margin-top:1.5rem;border-top:1px solid color-mix(in oklab,var(--sun) 70%,transparent);padding-top:1.5rem">
+            <button class="btn-sun" id="atc-btn">Begin my journey</button>
+            <p class="cta-sub" id="cta-sub-text">Take the first step—pause, look back, and thank the Lord.</p>
+          </div>
+          
+          <div style="margin-top:2rem">
+            <div class="accordion open" data-toggle-group>
+              <button class="accordion-btn" data-toggle>Inside Your Practice <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body">
+                <div>
+                  <ul id="details-inside">
+                    <li>120+ undated pages to gently begin with</li>
+                    <li>A simple structure to guide you through reflection, gratitude, and consistency</li>
+                    <li>Soft prompts and affirmations to help you open up, even on dry days</li>
+                    <li>Wisdom quotes woven through your journey to keep you anchored</li>
+                    <li>Thoughtfully designed pages for lookback moments</li>
+                    <li>A quiet space to check in with yourself every day</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion" data-toggle-group>
+              <button class="accordion-btn" data-toggle>This Is for You If <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body">
+                <div>
+                  <ul id="details-for-you">
+                    <li>You know consistency matters, but struggle to truly feel it daily</li>
+                    <li>You want to recognize your own growth in your everyday life</li>
+                    <li>You're wishing to gently move from overthinking to appreciation</li>
+                    <li>You want a quiet, dedicated space to check in without screen distraction</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion" id="details-experience-wrapper" data-toggle-group>
+              <button class="accordion-btn" data-toggle>What Souls Experience <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body">
+                <div>
+                  <ul id="details-experience">
+                    <!-- Dynamic bullet points will load here -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion" data-toggle-group>
+              <button class="accordion-btn" data-toggle>Details and Care <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              <div class="accordion-body">
+                <div>
+                  <ul id="details-specs">
+                    <li>Size: A5 (14.8 X 21.2 cm)</li>
+                    <li>Ultra Matte Finish Hardbound Cover</li>
+                    <li>Paper: 100 GSM Natural Maplitho Sunshine</li>
+                    <li>165 pages</li>
+                    <li>Undated format</li>
+                    <li>Dynamic printed pages</li>
+                    <li>Comes wrapped in a keepsafe cover</li>
+                  </ul>
+                  <p style="padding:0 0 1.25rem 1.25rem;font-size:0.875rem;color:color-mix(in oklab,var(--foreground) 80%,transparent)">
+                    <strong>Shipping &amp; Returns</strong><br>
+                    We craft every order with care and usually ship within 2 working days. Delivery takes 5–7 days within India, and 8–10 days worldwide. Each journal is created with intention just for you, so returns aren't available at the moment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <section class="section">
+        <div class="wrap-sm center">
+          <h2 class="heading reveal" style="color:#13b3df; text-align:center; font-size:clamp(1.75rem, 4vw, 2.75rem); margin-bottom:1.5rem;">Journaling journeys from our souls</h2>
+          <p class="reveal" style="font-style:italic;color:color-mix(in oklab,var(--foreground) 80%,transparent)" id="custom-review">"This is my third gratitude journal from soulscribe… and something has truly shifted. I don't just write gratitude anymore, I feel it, in the smallest moments too."</p>
+          <p class="reveal" style="margin-top:1rem" id="custom-review-author">— Radhika P., Mumbai</p>
+          <div class="stars" style="font-size:1.25rem;margin-top:0.75rem">★★★★★</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <h2 class="heading reveal" style="color:#13b3df; text-align:center; font-size:clamp(1.75rem, 4vw, 2.75rem); margin-bottom:1.5rem;">Souls also love</h2>
+          <div class="products-grid" id="recommended-products" style="grid-template-columns:repeat(3,1fr)">
+            <!-- Recommended product cards will load dynamically -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../shop.html">Shop</a></li>
+            <li><a href="../journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="../experiences.html">Immersions</a></li>
+            <li><a href="../rise-collective.html">The RISE Collective</a></li>
+            <li><a href="../nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="../behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="../connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="../terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="../terms.html">Terms and Conditions</a></li>
+            <li><a href="../terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<script src="../main.js"></script>
+<script>
+  // Product custom metadata overrides are loaded from window.PRODUCT_CUSTOM_META defined in main.js
+
+
+  async function loadDynamicProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const handle = params.get('handle');
+    if (!handle) {
+      document.getElementById('loader').innerHTML = '<p style="color:var(--teal-accent)">Product not specified. <a href="../shop.html" style="text-decoration:underline">Go back to Shop</a></p>';
+      return;
+    }
+
+    // Update body attribute so that header cart drawer behaves correctly
+    document.body.setAttribute('data-shopify-handle', handle);
+    document.body.classList.add('loaded');
+
+
+    const query = `
+      query getProductByHandle($handle: String!) {
+        product(handle: $handle) {
+          id
+          title
+          handle
+          description
+          featuredImage {
+            url
+          }
+          images(first: 5) {
+            nodes {
+              url
+            }
+          }
+          variants(first: 1) {
+            nodes {
+              id
+              title
+              price {
+                amount
+                currencyCode
+              }
+              availableForSale
+            }
+          }
+        }
+        products(first: 4) {
+          nodes {
+            id
+            title
+            handle
+            featuredImage {
+              url
+            }
+            variants(first: 1) {
+              nodes {
+                id
+                price {
+                  amount
+                }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    try {
+      const response = await fetch(
+        `https://${window.SHOP_URL}/api/2025-01/graphql.json`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Shopify-Storefront-Access-Token": window.STOREFRONT_TOKEN
+          },
+          body: JSON.stringify({ query, variables: { handle } })
+        }
+      );
+
+      const result = await response.json();
+      const product = result.data?.product;
+      const allProducts = result.data?.products?.nodes || [];
+
+      if (!product) {
+        document.getElementById('loader').innerHTML = '<p style="color:var(--teal-accent)">Product not found. <a href="../shop.html" style="text-decoration:underline">Go back to Shop</a></p>';
+        return;
+      }
+
+      // Hide loader and show page content
+      document.getElementById('loader').classList.add('hidden');
+      document.getElementById('product-container').classList.remove('hidden');
+
+      // Populate title and metadata
+      document.title = `${product.title} — Soulscribe`;
+      document.getElementById('product-title').textContent = product.title;
+
+      const variant = product.variants.nodes[0];
+      const priceAmount = parseFloat(variant.price.amount);
+
+      // Custom metadata overrides
+      const customMeta = (window.PRODUCT_CUSTOM_META && (window.PRODUCT_CUSTOM_META[product.handle] || window.PRODUCT_CUSTOM_META[product.handle + "-journaling-kit"])) || {};
+      const finalPrice = priceAmount; // price from Shopify live
+      document.getElementById('product-price').textContent = `INR ${Math.round(finalPrice)}`;
+
+      // Update Tagline
+      if (customMeta.tagline) {
+        document.getElementById('product-tagline').textContent = customMeta.tagline;
+      } else {
+        document.getElementById('product-tagline').textContent = product.description || "A soulful practice from Soulscribe.";
+      }
+
+      // Update CTA subtext below button
+      if (customMeta.ctaSub) {
+        document.getElementById('cta-sub-text').textContent = customMeta.ctaSub;
+      }
+
+      // Update Experience Accordion
+      const experienceWrapper = document.getElementById('details-experience-wrapper');
+      if (customMeta.experience && customMeta.experience.length > 0) {
+        document.getElementById('details-experience').innerHTML = customMeta.experience.map(item => `<li>${item}</li>`).join('');
+        if (experienceWrapper) experienceWrapper.style.display = 'block';
+      } else {
+        if (experienceWrapper) experienceWrapper.style.display = 'none';
+      }
+
+      // Update Lists
+      if (customMeta.inside) {
+        document.getElementById('details-inside').innerHTML = customMeta.inside.map(item => `<li>${item}</li>`).join('');
+      } else {
+        // Fallback using description text or default points
+        document.getElementById('details-inside').innerHTML = `
+          <li>100% authentic, high-quality Soulscribe layout</li>
+          <li>Undated format — start your journaling journey anytime</li>
+          <li>Thoughtful prompts to help you reflect on your spiritual path</li>
+          <li>Details: ${product.description || 'A gentle journaling space.'}</li>
+        `;
+      }
+
+      if (customMeta.forYou) {
+        document.getElementById('details-for-you').innerHTML = customMeta.forYou.map(item => `<li>${item}</li>`).join('');
+      }
+
+      if (customMeta.specs) {
+        document.getElementById('details-specs').innerHTML = customMeta.specs.map(item => `<li>${item}</li>`).join('') + `
+          <p style="padding:0 0 1.25rem 1.25rem;font-size:0.875rem;color:color-mix(in oklab,var(--foreground) 80%,transparent)">
+            <strong>Shipping &amp; Returns</strong><br>
+            We craft every order with care and usually ship within 2 working days. Delivery takes 5–7 days within India, and 8–10 days worldwide. Each journal is created with intention just for you, so returns aren't available at the moment.
+          </p>
+        `;
+      }
+
+      if (customMeta.review) {
+        document.getElementById('custom-review').textContent = `"${customMeta.review}"`;
+        document.getElementById('custom-review-author').textContent = customMeta.author || "";
+      }
+
+      // Check if product is a planner
+      const PLANNER_HANDLES = [
+        'daily-prioritizer',
+        'do-it-for-krsna',
+        'holistic-jotter',
+        'soulful-self-care-checklist',
+        'balance-being',
+        'sadhana-in-sync'
+      ];
+      const isPlanner = PLANNER_HANDLES.includes(product.handle) ||
+                        (product.productType && product.productType.toLowerCase().includes('planner'));
+
+      if (isPlanner) {
+        document.body.classList.add('is-planner');
+      }
+
+      // Populate Image Gallery
+      const gallery = document.getElementById('image-gallery');
+      const productImages = product.images?.nodes || [];
+
+      if (isPlanner) {
+        // PLANNERS ONLY: Exactly one photo on left as fix, NO AI images
+        const mainImgUrl = productImages[0]?.url || product.featuredImage?.url;
+        if (mainImgUrl) {
+          gallery.innerHTML = `<img src="${mainImgUrl}" alt="${product.title}" loading="eager">`;
+        }
+      } else {
+        // JOURNALING KITS: Real images only (NO AI images)
+        if (productImages.length === 0) {
+          gallery.innerHTML = `<img src="../assets/product_photos/THANKYOU%20KRISHNA%20JOURNALING%20KIT/mockup%20-%201st%20photo.png" alt="${product.title}">`;
+        } else {
+          gallery.innerHTML = productImages.map((img, idx) => `
+            <img src="${img.url}" alt="${product.title} view ${idx + 1}" loading="${idx === 0 ? 'eager' : 'lazy'}">
+          `).join('');
+        }
+      }
+
+      // Quantity adjustments
+      let quantity = 1;
+      const countEl = document.getElementById('qty-count');
+      const qtyDec = document.getElementById('qty-dec');
+      const qtyInc = document.getElementById('qty-inc');
+      qtyDec.replaceWith(qtyDec.cloneNode(true));
+      qtyInc.replaceWith(qtyInc.cloneNode(true));
+
+      document.getElementById('qty-dec').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (quantity > 1) {
+          quantity--;
+          countEl.textContent = quantity;
+        }
+      });
+      document.getElementById('qty-inc').addEventListener('click', (e) => {
+        e.preventDefault();
+        quantity++;
+        countEl.textContent = quantity;
+      });
+
+      // Add to Cart
+      const atcBtn = document.getElementById('atc-btn');
+      if (!variant.availableForSale) {
+        atcBtn.textContent = "Sold Out";
+        atcBtn.disabled = true;
+      } else {
+        atcBtn.textContent = "Begin my journey";
+        atcBtn.disabled = false;
+        atcBtn.replaceWith(atcBtn.cloneNode(true));
+        const newAtcBtn = document.getElementById('atc-btn');
+        newAtcBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const imgUrl = product.featuredImage?.url || '../assets/journal-kit.jpg';
+          window.CartManager.add(
+            variant.id,
+            product.title,
+            finalPrice,
+            imgUrl,
+            product.handle,
+            quantity
+          );
+        });
+      }
+
+      // Render Recommended products (Souls also love)
+      const recommendedContainer = document.getElementById('recommended-products');
+      if (recommendedContainer) {
+        let recommendedList = [];
+        const recommendationsMap = window.RECOMMENDATIONS_MAP || {};
+        const recHandles = recommendationsMap[product.handle] || recommendationsMap[product.handle + "-journaling-kit"];
+        if (recHandles) {
+          recommendedList = recHandles.map(h => allProducts.find(p => p.handle === h || p.handle === h + "-journaling-kit")).filter(Boolean);
+        }
+        if (recommendedList.length < 3) {
+          const fallbacks = allProducts.filter(p => p.handle !== product.handle && !recommendedList.some(r => r.handle === p.handle));
+          recommendedList = [...recommendedList, ...fallbacks].slice(0, 3);
+        }
+
+        // Set the color of "Souls also love" heading to light blue
+        const recommendedSection = recommendedContainer.closest('section');
+        if (recommendedSection) {
+          const heading = recommendedSection.querySelector('h2.heading');
+          if (heading) heading.style.color = 'var(--teal-accent)';
+        }
+
+        recommendedContainer.innerHTML = recommendedList.map((p, idx) => {
+          const itemUrl = window.location.pathname + '?handle=' + p.handle; // dynamically stay on this page with new handle
+          const itemPrice = Math.round(parseFloat(p.variants.nodes[0].price.amount)); // price from Shopify live
+          const itemImg = p.featuredImage?.url || '../assets/journal-kit.jpg';
+          const delay = idx * 100;
+          return `
+            <div class="product-card reveal" data-delay="${delay}">
+              <a href="${itemUrl}" style="width:100%">
+                <div class="img"><img src="${itemImg}" alt="${p.title}" loading="lazy"><a class="btn-yellow-gradient" href="#" style="text-decoration:none; margin-top:0.75rem; font-size:0.85rem; padding:0.4rem 1.2rem; display:inline-block;">Begin My Journey</a></div>
+                <h3>${p.title}</h3>
+              </a>
+              <p class="price">INR ${itemPrice}</p>
+            </div>
+          `;
+        }).join('');
+        if (typeof window.initRecommendedCarousel === "function") {
+          window.initRecommendedCarousel();
+        }
+      }
+
+      // Initialize slide accordion click behaviors
+      if (typeof window.initToggles === "function") {
+        window.initToggles();
+      }
+
+      // Stagger reveal animations
+      if (typeof window.initReveal === "function") {
+        window.initReveal();
+      }
+
+    } catch (err) {
+      console.error("Error loading dynamic product:", err);
+      document.getElementById('loader').innerHTML = '<p style="color:var(--teal-accent)">Error loading product details. Please try again.</p>';
+    }
+  }
+
+  // Load when window DOM is parsed
+  document.addEventListener('DOMContentLoaded', loadDynamicProduct);
+</script>
+</body>
+</html>

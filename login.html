@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — Soulscribe</title>
+<meta name="description" content="Welcome to your Soulscribe space. Login to access journaling journeys, track orders, and join masterclasses.">
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ss-teal: #13b3df;
+    --ss-navy: #0d3f5a;
+    --ss-navy-dark: #08293c;
+    --ss-cream: #fefaed;
+    --ss-gold: #ffdd4f;
+    --ss-gold-accent: #d4a842;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--ss-navy);
+    margin: 0;
+    color: var(--ss-navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated Spiritual Ambient Background (No image/video assets) */
+  .ambient-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 20%, #124b6b 0%, #08283a 100%);
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    animation: floatOrb 14s infinite ease-in-out alternate;
+  }
+  .orb-1 {
+    width: 450px; height: 450px;
+    background: #13b3df;
+    top: -100px; left: -100px;
+  }
+  .orb-2 {
+    width: 500px; height: 500px;
+    background: #ffdd4f;
+    bottom: -150px; right: -100px;
+    animation-delay: -5s;
+    opacity: 0.22;
+  }
+  .orb-3 {
+    width: 350px; height: 350px;
+    background: #4fa3d1;
+    top: 40%; left: 60%;
+    animation-delay: -9s;
+    opacity: 0.25;
+  }
+
+  @keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, 40px) scale(1.1); }
+    100% { transform: translate(-20px, -30px) scale(0.95); }
+  }
+
+  /* Sparkles background effect */
+  .sparkle-svg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.3;
+    animation: sparkleFade 3s infinite ease-in-out alternate;
+  }
+
+  @keyframes sparkleFade {
+    0% { opacity: 0.15; transform: scale(0.8); }
+    100% { opacity: 0.45; transform: scale(1.1); }
+  }
+
+  /* Header override for login page */
+  .sticky-top {
+    position: relative;
+    z-index: 10;
+  }
+
+  .login-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.25rem;
+    position: relative;
+    z-index: 5;
+  }
+
+  /* Glassmorphic Login Card */
+  .login-card {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(254, 250, 237, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 3.25rem 2.5rem;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .login-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #13b3df, #ffdd4f, #d4a842, #13b3df);
+    background-size: 200% 100%;
+    animation: gradientFlow 5s linear infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+
+  .brand-icon-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .brand-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d3f5a, #134e6f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(13, 63, 90, 0.25);
+    border: 2px solid #ffdd4f;
+  }
+
+  .login-header-text {
+    text-align: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .login-title {
+    font-family: 'Lora', serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    color: var(--ss-navy);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .login-sub {
+    color: #5a6e7f;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Login Mode Tabs (Mobile / Email) */
+  .auth-mode-tabs {
+    display: flex;
+    background: rgba(13, 63, 90, 0.07);
+    border-radius: 14px;
+    padding: 4px;
+    margin-bottom: 1.75rem;
+  }
+
+  .auth-tab {
+    flex: 1;
+    padding: 0.65rem 0;
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #5a6e7f;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .auth-tab.active {
+    background: #ffffff;
+    color: var(--ss-navy);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .login-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .login-field label {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ss-navy);
+    margin-bottom: 0.55rem;
+    text-transform: uppercase;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #dce4ec;
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-wrapper:focus-within {
+    border-color: var(--ss-teal);
+    box-shadow: 0 0 0 4px rgba(19, 179, 223, 0.15);
+  }
+
+  .country-code {
+    padding: 0.85rem 0.85rem 0.85rem 1.1rem;
+    font-weight: 600;
+    color: var(--ss-navy);
+    font-size: 0.95rem;
+    background: #f4f7f9;
+    border-right: 1px solid #dce4ec;
+    user-select: none;
+  }
+
+  .login-input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--ss-navy);
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .login-input.standalone {
+    border: 1.5px solid #dce4ec;
+    border-radius: 14px;
+    background: #ffffff;
+  }
+  .login-input.standalone:focus {
+    border-color: var(--ss-teal);
+    box-shadow: 0 0 0 4px rgba(19, 179, 223, 0.15);
+  }
+
+  .otp-input {
+    letter-spacing: 0.5em;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ss-navy);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 0.95rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, #ffdd4f, #f59e0b);
+    color: var(--ss-navy);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(245, 158, 11, 0.45);
+    filter: brightness(1.03);
+  }
+  .submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .error-box {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    color: #9f1239;
+    display: none;
+    text-align: center;
+  }
+
+  .dev-otp-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    color: #1e40af;
+    display: none;
+    text-align: center;
+  }
+  .dev-otp-box strong { font-size: 1.15rem; color: #1e3a8a; }
+
+  .otp-info-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    color: #166534;
+    text-align: center;
+  }
+
+  .login-footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.88rem;
+  }
+  .login-footer-nav a {
+    color: #5a6e7f;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color 0.2s;
+  }
+  .login-footer-nav a:hover { color: var(--ss-navy); }
+
+  .spin-icon {
+    width: 18px; height: 18px;
+    border: 2.5px solid rgba(13,63,90,0.25);
+    border-top-color: var(--ss-navy);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  footer {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 2rem 1rem;
+    color: rgba(254, 250, 237, 0.7);
+  }
+  footer h2 {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: #fefaed;
+  }
+  footer p { margin: 0; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<!-- Ambient Spiritual Background (No assets required) -->
+<div class="ambient-bg">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Ambient SVG Sparkles -->
+  <svg class="sparkle-svg" style="top: 15%; left: 20%;" width="24" height="24" viewBox="0 0 24 24" fill="#ffdd4f"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+  <svg class="sparkle-svg" style="top: 25%; right: 15%; animation-delay: 1s;" width="18" height="18" viewBox="0 0 24 24" fill="#13b3df"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+  <svg class="sparkle-svg" style="bottom: 20%; left: 12%; animation-delay: 2s;" width="20" height="20" viewBox="0 0 24 24" fill="#ffdd4f"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+  <svg class="sparkle-svg" style="bottom: 25%; right: 22%; animation-delay: 1.5s;" width="22" height="22" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+</div>
+
+<!-- Header Navigation -->
+<div class="sticky-top">
+  <div class="announce"><a href="rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="shop.html">Shop</a>
+    <a href="journaling-journeys.html">Journaling Journeys</a>
+    <a href="experiences.html">Immersions</a>
+    <a href="rise-collective.html">The RISE Collective</a>
+    <a href="nectar-for-soul.html">Nectar for the soul</a>
+    <a href="behind-the-bliss.html">Behind the Bliss</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+  <div class="drawer-foot"><p>Journal back to bliss.</p><p>A gentle space to pause, reflect &amp; write.</p></div>
+</aside>
+
+<!-- Main Form Section -->
+<main class="login-container">
+  <div class="login-card">
+
+    <!-- Pure SVG Brand Badge Header -->
+    <div class="brand-icon-wrap">
+      <div class="brand-badge">
+        <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+          <path d="M16 2L19.5 12.5L30 16L19.5 19.5L16 30L12.5 19.5L2 16L12.5 12.5L16 2Z" fill="#ffdd4f"/>
+          <circle cx="16" cy="16" r="3.5" fill="#13b3df"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Title & Subtitle -->
+    <div class="login-header-text">
+      <h1 class="login-title" id="login-title">Welcome to your<br>soul space ✦</h1>
+      <p class="login-sub" id="login-sub">Sign in to track orders, access guided masterclasses &amp; free journaling prompts.</p>
+    </div>
+
+    <!-- Auth Method Tabs -->
+    <div class="auth-mode-tabs" id="auth-tabs">
+      <button class="auth-tab active" id="tab-mobile-btn" onclick="switchTab('mobile')">📱 Mobile Number</button>
+      <button class="auth-tab" id="tab-email-btn" onclick="switchTab('email')">✉️ Email Address</button>
+    </div>
+
+    <!-- Error Box -->
+    <div class="error-box" id="error-msg"></div>
+
+    <!-- Dev Mode OTP Box -->
+    <div class="dev-otp-box" id="dev-notice">
+      🔧 Demo Mode — Use OTP: <strong id="dev-otp-code">1234</strong>
+    </div>
+
+    <!-- OTP Sent Banner -->
+    <div class="otp-info-box" id="otp-info-box" style="display:none;">
+      ✓ Code sent to <strong id="sent-target"></strong>.<br>
+      <a href="#" onclick="resetForm(event)" style="color:#166534; font-size:0.82rem; text-decoration:underline; margin-top:4px; display:inline-block;">Change input</a>
+    </div>
+
+    <!-- MODE 1: Mobile Number Login -->
+    <div id="mode-mobile">
+      <div id="phone-step">
+        <div class="login-field">
+          <label for="phone-input">Mobile Number</label>
+          <div class="input-wrapper">
+            <span class="country-code">🇮🇳 +91</span>
+            <input type="tel" id="phone-input" class="login-input" placeholder="10-digit number" maxlength="10" inputmode="numeric">
+          </div>
+        </div>
+        <button class="submit-btn" id="phone-submit-btn" onclick="handleMobileSubmit()">
+          <span id="phone-btn-text">Send OTP Code</span>
+          <span class="spin-icon" id="phone-spin"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MODE 2: Email Address Login -->
+    <div id="mode-email" style="display:none;">
+      <div id="email-step">
+        <div class="login-field">
+          <label for="email-input">Email Address</label>
+          <input type="email" id="email-input" class="login-input standalone" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <button class="submit-btn" id="email-submit-btn" onclick="handleEmailSubmit()">
+          <span id="email-btn-text">Continue with Email</span>
+          <span class="spin-icon" id="email-spin"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- COMMON STEP 2: OTP / Verification Code -->
+    <div id="common-otp-step" style="display:none;">
+      <div class="login-field">
+        <label for="otp-input">Enter 4-Digit Code</label>
+        <input type="text" id="otp-input" class="login-input standalone otp-input" placeholder="••••" maxlength="4" inputmode="numeric">
+      </div>
+      <button class="submit-btn" id="verify-btn" onclick="handleVerifyOTP()">
+        <span id="verify-btn-text">Verify &amp; Enter Soul Space</span>
+        <span class="spin-icon" id="verify-spin"></span>
+      </button>
+      <p style="text-align:center; margin-top: 1.25rem; font-size: 0.88rem; color: #5a6e7f;">
+        Didn't receive the code?
+        <a href="#" id="resend-btn" onclick="handleResend(event)" style="color: var(--ss-navy); font-weight: 600; text-decoration: underline;">Resend Code</a>
+        <span id="timer-text" style="color: #94a3b8; font-size: 0.82rem; margin-left: 0.2rem;"></span>
+      </p>
+    </div>
+
+    <!-- Footer navigation -->
+    <div class="login-footer-nav">
+      <a href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+      </a>
+      <a href="connect.html">Need Help?</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="experiences.html">Immersions</a></li>
+            <li><a href="rise-collective.html">The RISE Collective</a></li>
+            <li><a href="nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+            <li><a href="terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  let activeTab = 'mobile';
+  let targetValue = '';
+  let timerInterval = null;
+
+  function switchTab(mode) {
+    activeTab = mode;
+    hideError();
+    document.getElementById('tab-mobile-btn').classList.toggle('active', mode === 'mobile');
+    document.getElementById('tab-email-btn').classList.toggle('active', mode === 'email');
+    document.getElementById('mode-mobile').style.display = mode === 'mobile' ? 'block' : 'none';
+    document.getElementById('mode-email').style.display = mode === 'email' ? 'block' : 'none';
+    document.getElementById('common-otp-step').style.display = 'none';
+    document.getElementById('otp-info-box').style.display = 'none';
+    document.getElementById('dev-notice').style.display = 'none';
+  }
+
+  function showError(msg) {
+    const box = document.getElementById('error-msg');
+    box.textContent = msg;
+    box.style.display = 'block';
+  }
+
+  function hideError() {
+    document.getElementById('error-msg').style.display = 'none';
+  }
+
+  function startTimer(seconds = 30) {
+    const timerText = document.getElementById('timer-text');
+    const resendBtn = document.getElementById('resend-btn');
+    resendBtn.style.opacity = '0.4';
+    resendBtn.style.pointerEvents = 'none';
+    let remaining = seconds;
+    timerText.textContent = `(${remaining}s)`;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      remaining--;
+      timerText.textContent = remaining > 0 ? `(${remaining}s)` : '';
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        resendBtn.style.opacity = '1';
+        resendBtn.style.pointerEvents = 'auto';
+      }
+    }, 1000);
+  }
+
+  function handleMobileSubmit() {
+    hideError();
+    const phone = document.getElementById('phone-input').value.trim();
+    if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+      showError('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+    targetValue = '+91 ' + phone;
+    showOtpStep();
+  }
+
+  function handleEmailSubmit() {
+    hideError();
+    const email = document.getElementById('email-input').value.trim();
+    if (!email || !email.includes('@')) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+    targetValue = email;
+    showOtpStep();
+  }
+
+  function showOtpStep() {
+    document.getElementById('auth-tabs').style.display = 'none';
+    document.getElementById('mode-mobile').style.display = 'none';
+    document.getElementById('mode-email').style.display = 'none';
+    document.getElementById('common-otp-step').style.display = 'block';
+
+    document.getElementById('login-title').textContent = 'Enter your OTP ✦';
+    document.getElementById('login-sub').textContent = 'We sent a 4-digit code for instant verification';
+    
+    document.getElementById('otp-info-box').style.display = 'block';
+    document.getElementById('sent-target').textContent = targetValue;
+
+    document.getElementById('dev-notice').style.display = 'block';
+    document.getElementById('dev-otp-code').textContent = '1234';
+    document.getElementById('otp-input').value = '1234';
+    document.getElementById('otp-input').focus();
+
+    startTimer(30);
+  }
+
+  function handleVerifyOTP() {
+    hideError();
+    const otp = document.getElementById('otp-input').value.trim();
+    if (otp.length !== 4) {
+      showError('Please enter the 4-digit code.');
+      return;
+    }
+
+    // Save session state
+    localStorage.setItem('ss_token', 'soul_token_' + Date.now());
+    localStorage.setItem('ss_user', targetValue);
+
+    document.getElementById('login-title').textContent = 'You\'re in! ✦';
+    document.getElementById('login-sub').textContent = 'Redirecting to your soul space...';
+    document.getElementById('common-otp-step').style.display = 'none';
+    document.getElementById('otp-info-box').style.display = 'none';
+    document.getElementById('dev-notice').style.display = 'none';
+
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 700);
+  }
+
+  function handleResend(e) {
+    e.preventDefault();
+    document.getElementById('otp-input').value = '';
+    showOtpStep();
+  }
+
+  function resetForm(e) {
+    if (e) e.preventDefault();
+    document.getElementById('auth-tabs').style.display = 'flex';
+    switchTab(activeTab);
+    document.getElementById('login-title').textContent = 'Welcome to your\nsoul space ✦';
+    document.getElementById('login-sub').textContent = 'Sign in to track orders, access guided masterclasses & free journaling prompts.';
+    clearInterval(timerInterval);
+  }
+
+  document.getElementById('phone-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') handleMobileSubmit(); });
+  document.getElementById('email-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') handleEmailSubmit(); });
+  document.getElementById('otp-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') handleVerifyOTP(); });
+
+  document.getElementById('otp-input')?.addEventListener('input', e => {
+    const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+    e.target.value = val;
+    if (val.length === 4) setTimeout(handleVerifyOTP, 300);
+  });
+</script>
+</body>
+</html>

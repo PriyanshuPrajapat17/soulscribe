@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The RISE Collective — Soulscribe</title>
+<meta name="description" content="Join the RISE Collective — a gentle, growing community to Reflect Intentionally, Share, and Evolve together through journaling and spiritual practice.">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* ── RISE Collective Page Styles ── */
+  :root {
+    --rise-teal:   #13b3df;
+    --rise-cream:  #fffff9;
+    --rise-cream2: #fffff9;
+    --rise-gold:   #c9960c;
+    --rise-goldbg: #d4a842;
+    --rise-navy:   #1c2f4a;
+    --rise-text:   #0d3f5a;
+  }
+  body {
+    background-color: #fffff9;
+  }
+
+  .rise-hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: #0d3f5a;
+  }
+  .rise-hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .desktop-video { display: block; }
+  .mobile-video { display: none; }
+  @media (max-width: 768px) {
+    .desktop-video { display: none; }
+    .mobile-video { display: block; }
+  }
+
+  .rise-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: rgba(13, 63, 90, 0.4);
+    z-index: 1;
+  }
+  .rise-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+  }
+  .rise-hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: #ffffff;
+    margin-bottom: 1.75rem;
+    font-family: var(--font-display);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .rise-btn-circle {
+    display: inline-block;
+    padding: 0.9rem 2.85rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 999px;
+    color: #0d3f5a !important;
+    background: linear-gradient(135deg, #ffdd4f 0%, #ffe98f 100%);
+    box-shadow: 0 4px 14px rgba(255, 221, 79, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .rise-btn-circle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 221, 79, 0.55);
+    filter: brightness(1.03);
+  }
+
+  .rise-what {
+    background: var(--rise-cream);
+    padding: 2.5rem 1.5rem 3rem;
+    text-align: center;
+  }
+  .rise-what h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--rise-teal);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+  .rise-what .rise-sub {
+    font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+    color: #0d3f5a;
+    margin-bottom: 1.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .rise-what p {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.85;
+    color: #0d3f5a;
+    font-size: 1.05rem;
+  }
+
+  /* ── COMMUNITY FOR YOU IF ── */
+  .rise-foryou {
+    background: var(--rise-cream);
+    padding: 1.5rem 1.5rem 3.5rem;
+  }
+  .rise-foryou h2 {
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    color: var(--rise-teal);
+    text-align: center;
+    margin-top: -0.5rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .rise-foryou-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .rise-foryou-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+  .rise-foryou-col.right { text-align: right; }
+  .rise-sentence {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.22,.61,.36,1);
+  }
+  .rise-sentence.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .rise-foryou-col p {
+    font-size: 1.08rem;
+    color: #0d3f5a;
+    line-height: 1.55;
+    font-weight: 400;
+    margin: 0;
+  }
+  .rise-foryou-illus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes floatGirl {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+  }
+  .rise-foryou-illus img {
+    animation: floatGirl 4s ease-in-out infinite;
+  }
+  @media (max-width: 680px) {
+    .rise-foryou-grid {
+      grid-template-columns: 1fr;
+      text-align: center !important;
+    }
+    .rise-foryou-col.right { text-align: center; }
+    .rise-foryou-illus { display: flex; order: -1; margin-bottom: 2rem; }
+  }
+
+  /* ── VIDEO + QUOTE ── */
+  .rise-video-quote {
+    background: var(--rise-cream);
+    padding: 0 1.5rem 2rem;
+  }
+  .rise-video-box {
+    max-width: 840px;
+    margin: 0 auto 3rem;
+    background: #a8d8e8;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rise-video-box iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .rise-quote-text {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .rise-quote-text blockquote {
+    font-size: clamp(1.3rem, 4vw, 2.1rem);
+    color: var(--rise-teal);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-family: 'Lora', serif;
+  }
+  .typewriter-text {
+    display: inline;
+    white-space: normal;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  .reveal.in .typewriter-text {
+    opacity: 1;
+  }
+  .rise-quote-text .rise-author {
+    font-size: 1.15rem;
+    color: #0d3f5a;
+    font-weight: 500;
+  }
+
+  /* ── WAYS WE RISE ── */
+  .rise-ways {
+    background: var(--rise-cream);
+    padding: 0.75rem 1.5rem 5rem;
+    text-align: center;
+  }
+  .rise-ways h2 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--rise-teal);
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+  }
+  .rise-ways-sub {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    color: #0d3f5a;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  /* ── FLIP CARDS: DESKTOP (hover flip) ── */
+  .rise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    /* Mobile: swipeable carousel */
+    .rise-grid {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      touch-action: pan-y;
+    }
+    .rise-cards-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+    .rise-card {
+      flex: 0 0 calc(100% - 2.5rem) !important;
+      margin: 0 0.75rem !important;
+      min-height: 300px !important;
+      border-radius: 16px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .rise-card .flip-inner {
+      height: 300px !important;
+    }
+    .rise-card.flipped .flip-inner {
+      transform: rotateY(180deg) !important;
+    }
+    /* Tap hint */
+    .flip-tap-hint {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    /* Carousel dots */
+    .rise-card-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+    .rise-card-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(19,179,223,0.25);
+      border: none; cursor: pointer; padding: 0;
+      transition: all 0.3s;
+    }
+    .rise-card-dot.active {
+      background: var(--rise-teal);
+      width: 22px;
+      border-radius: 999px;
+    }
+  }
+  @media (min-width: 769px) {
+    .rise-card-dots { display: none !important; }
+    .rise-cards-track { display: contents; }
+    .flip-tap-hint { display: none; }
+  }
+  .rise-card {
+    background-color: transparent;
+    perspective: 1000px;
+    min-height: 280px;
+    border-radius: 16px;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    border-radius: 16px;
+  }
+  .rise-card:hover .flip-inner,
+  .rise-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-front, .flip-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+  }
+  .flip-front {
+    background-size: cover;
+    background-position: center;
+  }
+  .rc-reflect .flip-front { background-image: url('assets/images/reflect%20tab%20image%20on%20rise%20page.png'); }
+  .rc-share .flip-front { background-image: url('assets/images/share%20tab%20image%20on%20rise%20page.png'); }
+  .rc-practice .flip-front { background-image: url('assets/images/practice%20tab%20on%20rise%20page.png'); }
+  .rc-celebrate .flip-front { background-image: url('assets/images/celebrate%20%20tab%20image%20rise%20page.png'); }
+  .rc-connect .flip-front { background-image: url('assets/images/connect%20tab%20image%20rise%20apg.png'); }
+  .rc-recharge .flip-front { background-image: url('assets/images/recharge%20tab%20image%20rise%20%20pg.png'); }
+  .flip-front::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,63,90,0.38) 0%, rgba(13,63,90,0.08) 100%);
+    border-radius: 16px;
+  }
+  .flip-front h3 {
+    position: relative; z-index: 1;
+    font-size: 1.45rem; font-weight: 700; color: #fff; margin: 0;
+    letter-spacing: .04em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  }
+  .flip-back {
+    background: var(--rise-teal);
+    transform: rotateY(180deg);
+  }
+  .flip-back p {
+    color: #fff; font-size: 1rem; line-height: 1.6; margin: 0;
+  }
+  .rise-steps-section {
+    padding: 5rem 1.5rem;
+    background: var(--rise-cream);
+    text-align: center;
+  }
+  .rise-steps-section h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--rise-teal);
+    font-weight: 400;
+    margin-bottom: 3.5rem;
+  }
+  .rise-steps {
+    list-style: none;
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    text-align: left;
+    padding: 0;
+  }
+  .rise-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .rise-step-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #fde891;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .rise-step-text {
+    font-size: 1.02rem;
+    color: #4a5568;
+    line-height: 1.65;
+    padding-top: 0.35rem;
+    font-weight: 400;
+  }
+  .rise-outro {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    color: var(--rise-teal);
+    max-width: 650px;
+    margin: 4rem auto 0;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ── INNER CIRCLE FORM ── */
+  .rise-waitlist {
+    background: #FFFFF9;
+    padding: 3.5rem 1.5rem 5rem;
+    text-align: center;
+  }
+  .rise-waitlist h2 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    color: #19b2de;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+  }
+  .wl-intro {
+    max-width: 640px;
+    margin: 0 auto 1.25rem;
+    color: #0d3f5a;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .rise-journey-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+    color: #0d3f5a;
+    border: none;
+    border-radius: 50px;
+    padding: 0.85rem 2.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 auto 1.25rem;
+    box-shadow: 0 4px 14px rgba(255, 193, 7, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .rise-journey-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 193, 7, 0.55);
+  }
+  .rise-form-card {
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    max-width: 720px;
+    margin: 2.5rem auto 0;
+    text-align: left;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  }
+  .rise-form-group { margin-bottom: 1.75rem; }
+  .rise-form-group label {
+    display: block;
+    font-size: .88rem;
+    font-weight: 600;
+    color: #0d3f5a;
+    margin-bottom: .4rem;
+    letter-spacing: .02em;
+  }
+  .rise-form-group input,
+  .rise-form-group select,
+  .rise-form-group textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #ffdd4f;
+    background: transparent;
+    padding: .55rem 0;
+    font-size: 1rem;
+    color: #0d3f5a;
+    outline: none;
+    font-family: inherit;
+    transition: border-color .2s;
+    appearance: none; -webkit-appearance: none;
+  }
+  .rise-form-group input:focus,
+  .rise-form-group select:focus,
+  .rise-form-group textarea:focus { border-bottom-color: #19b2de; }
+  .rise-form-group textarea { resize: none; min-height: 80px; line-height: 1.6; }
+  .rise-select-wrap { position: relative; }
+  .rise-select-wrap::after {
+    content: '▾';
+    position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    color: #aaa; pointer-events: none;
+  }
+  .rise-form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-bottom: 2rem;
+    font-size: .92rem;
+    color: #0d3f5a;
+    line-height: 1.5;
+  }
+  .rise-form-check input[type="checkbox"] {
+    width: 18px; height: 18px; flex-shrink: 0;
+    accent-color: #19b2de; margin-top: 2px;
+  }
+  .rise-submit-btn {
+    width: auto;
+    display: inline-block;
+    background: linear-gradient(135deg, #ffed99 0%, #ffe476 100%);
+    color: #0d3f5a;
+    border: none;
+    border-radius: 50px;
+    padding: 0.85rem 3rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    font-family: inherit;
+    box-shadow: 0 4px 14px rgba(255, 193, 7, 0.4);
+  }
+  .rise-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 193, 7, 0.55);
+  }
+  .form-center { text-align: center; margin-top: 0.5rem; }
+  /* Google Form embed card */
+  .rise-form-card {
+    background: #ffffff;
+    padding: 1rem;
+    max-width: 720px;
+    margin: 1rem auto 0;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .rise-form-card iframe {
+    width: 100%;
+    border: none;
+    border-radius: 1rem;
+    display: block;
+  }
+  .rise-form-success {
+    display: none;
+    text-align: center;
+    padding: 2.5rem 1rem;
+  }
+  .rise-form-success .sicon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+  .rise-form-success h3 { color: #19b2de; font-size: 1.75rem; margin-bottom: .75rem; font-family: var(--font-display); }
+  .rise-form-success p { color: #0d3f5a; line-height: 1.7; font-size: 1.05rem; 
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .rise-faq-list { max-width: 760px; margin: 0 auto; }
+  .rise-faq-item { border-bottom: 1.5px solid #e8b800; }
+  .rise-faq-item:first-child { border-top: 1.5px solid #e8b800; }
+  .rise-faq-btn {
+    width: 100%; background: none; border: none;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 0.1rem;
+    font-size: 1rem; font-weight: 600;
+    color: var(--rise-teal);
+    cursor: pointer; text-align: left;
+    font-family: inherit; gap: 1rem;
+    transition: color .2s;
+  }
+  .rise-faq-btn:hover { color: var(--rise-teal); opacity: .8; }
+  .faq-chev { flex-shrink: 0; transition: transform .3s; color: var(--rise-teal); }
+  .rise-faq-item.open .faq-chev { transform: rotate(180deg); }
+  .rise-faq-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+  .rise-faq-item.open .rise-faq-body { max-height: 500px; }
+  .rise-faq-body p {
+    padding: 0 .1rem 1.25rem;
+    color: #0d3f5a;
+    font-size: .97rem;
+    line-height: 1.75;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky Header -->
+<div class="sticky-top">
+  <div class="announce"><a href="rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="shop.html">Shop</a>
+    <a href="journaling-journeys.html">Journaling Journeys</a>
+    <a href="experiences.html">Immersions</a>
+    <a href="rise-collective.html">The RISE Collective</a>
+    <a href="nectar-for-soul.html">Nectar for the soul</a>
+    <a href="behind-the-bliss.html">Behind the Bliss</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+  <div class="drawer-foot"><p>Journal back to bliss.</p><p>A gentle space to pause, reflect &amp; write.</p></div>
+</aside>
+
+<main>
+
+  <!-- ── 1. HERO ── -->
+  <section class="rise-hero">
+    <video class="rise-hero-video desktop-video" autoplay loop muted playsinline>
+      <source src="assets/rise/rise_hero_desktop.mp4" type="video/mp4">
+    </video>
+    <!-- Mobile hero: new video from Google Drive; falls back to existing mobile video -->
+    <video class="rise-hero-video mobile-video" autoplay loop muted playsinline>
+      <source src="https://drive.google.com/uc?export=download&id=17tFPkWtFUvE32OK1Vw9eKgW0UZZTt_QX" type="video/mp4">
+      <source src="assets/rise/rise_hero_mobile.mp4" type="video/mp4">
+    </video>
+    <div class="rise-hero-bg"></div>
+    <div class="rise-hero-content">
+      <h1>The RISE Collective</h1>
+      <a href="#inner-circle" class="rise-btn-circle" id="hero-join-btn">Join the Circle</a>
+    </div>
+    <svg class="home-hero-curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 60px; z-index: 10; display: block;"><path fill="var(--rise-cream)" d="M0,0 C480,120 960,120 1440,0 L1440,120 L0,120 Z"></path></svg>
+  </section>
+
+  <!-- ── 2. WHAT IS RISE? ── -->
+  <section class="rise-what">
+    <div class="wrap-sm">
+      <h2 class="reveal">What is RISE?</h2>
+      <p class="rise-sub reveal"><strong>A space to Reflect Intentionally, Share,<br>and Evolve — together.</strong></p>
+      <p class="reveal">RISE is a gentle, growing community for souls who long to journal more deeply but don't want to do it alone. We believe real spiritual growth happens when we pause, put our realisations into words, and let them settle into our hearts. Through honest reflection, meaningful conversation, and shared experiences, we support one another in becoming who we really are —<br><span style="display:inline-block; margin-top:0.75rem; font-weight:600; color:var(--rise-teal); font-style:italic;">Page by Page, prayer by prayer</span></p>
+    </div>
+  </section>
+
+  <!-- ── 3. THIS COMMUNITY IS FOR YOU IF… ── -->
+  <section class="rise-foryou">
+    <div class="wrap">
+      <h2 class="reveal">This community is<br><span style="font-size:0.88em;">and for You</span></h2>
+      <div class="rise-foryou-grid">
+        <!-- Left column -->
+        <div class="rise-foryou-col left">
+          <div class="rise-sentence reveal" data-delay="100">
+            <p>You long to feel understood<br>on your journey:</p>
+          </div>
+          <div class="rise-sentence reveal" data-delay="250">
+            <p>You aspire to journal<br>more consistently</p>
+          </div>
+          <div class="rise-sentence reveal" data-delay="400">
+            <p>You'd like to grow alongside<br>souls</p>
+          </div>
+        </div>
+        <!-- Centre illustration -->
+        <div class="rise-foryou-illus reveal" data-delay="200">
+          <img src="assets/rise_this_is_for_you.png" alt="This community is for you" style="width:280px;height:auto;max-width:100%;">
+        </div>
+        <!-- Right column -->
+        <div class="rise-foryou-col right">
+          <div class="rise-sentence reveal" data-delay="100">
+            <p>You value gentle structure<br>that supports you</p>
+          </div>
+          <div class="rise-sentence reveal" data-delay="250">
+            <p>You enjoy reflecting<br>and sharing insights</p>
+          </div>
+          <div class="rise-sentence reveal" data-delay="400">
+            <p>You value belonging &amp;<br>meaningful conversations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. VIDEO + FOUNDER QUOTE ── -->
+  <section class="rise-video-quote">
+    <!-- Video embed -->
+    <div class="rise-video-box reveal" style="background: transparent;">
+      <iframe src="https://www.youtube.com/embed/fnPYri7M3I8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <!-- Quote -->
+    <div class="rise-quote-text">
+      <blockquote class="reveal"><span class="typewriter-text">"I believe spiritual growth is richer when shared."</span></blockquote>
+      <p class="rise-author reveal" data-delay="400">— Namapriya, Founder of Soulscribe</p>
+    </div>
+  </section>
+  <div style="text-align:center; padding-top:0.75rem; padding-bottom:0.75rem; background: var(--rise-cream);"><img src="assets/icons/section-divider.png" alt="Divider" style="height:30px; margin:0 auto;"></div>
+
+  <!-- ── 5. WAYS WE RISE TOGETHER ── -->
+  <section class="rise-ways">
+    <div class="wrap">
+      <h2 class="reveal">Ways We RISE Together</h2>
+      <div class="rise-grid" id="riseCardsGrid" style="margin-top: 2.5rem;">
+        <!-- rise-cards-track: flex container on mobile, display:contents on desktop -->
+        <div class="rise-cards-track" id="riseCardsTrack">
+          <div class="rise-card rc-reflect reveal">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Reflect</h3></div>
+              <div class="flip-back"><p>Explore topics like gratitude, surrender, service, and inner resilience through guided journaling experiences.</p></div>
+            </div>
+          </div>
+          <div class="rise-card rc-share reveal" data-delay="80">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Share</h3></div>
+              <div class="flip-back"><p>Monthly sessions filled with journaling journeys, reflections, ideas, and inspiring, soothing activities.</p></div>
+            </div>
+          </div>
+          <div class="rise-card rc-practice reveal" data-delay="160">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Practice</h3></div>
+              <div class="flip-back"><p>Participate in weekly challenges and intentionally designed reflections to weave insight into everyday life.</p></div>
+            </div>
+          </div>
+          <div class="rise-card rc-celebrate reveal" data-delay="80">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Celebrate</h3></div>
+              <div class="flip-back"><p>Come together and celebrate joyous journaling milestones, Scribe Fiestas, Blessing Days, and much more.</p></div>
+            </div>
+          </div>
+          <div class="rise-card rc-connect reveal" data-delay="160">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Connect</h3></div>
+              <div class="flip-back"><p>Stay close and connect through virtual immersions, in-person community experiences, and heartfelt conversations.</p></div>
+            </div>
+          </div>
+          <div class="rise-card rc-recharge reveal" data-delay="240">
+            <div class="flip-inner">
+              <div class="flip-front"><span class="flip-tap-hint">tap to reveal</span><h3>Recharge</h3></div>
+              <div class="flip-back"><p>Step away from the noise and reconnect through deeper experiences, retreats, mantra meditation, and sound healing.</p></div>
+            </div>
+          </div>
+        </div><!-- /rise-cards-track -->
+      </div><!-- /rise-grid -->
+      <!-- Carousel dots (mobile only, built by JS) -->
+      <div class="rise-card-dots" id="riseCardDots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ── 6. JOIN THE INNER CIRCLE ── -->
+  <section id="inner-circle" class="rise-waitlist">
+    <div class="wrap-sm">
+      <h2 class="reveal">Join the Inner Circle</h2>
+      <p class="wl-intro reveal">The membership is completely FREE but we shall be screening the applications.</p>
+
+      <!-- Primary CTA: redirect to Google Form in new tab -->
+     
+
+      <!-- Embedded Google Form -->
+      <div class="rise-form-card reveal">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSeu8T0z73c4VTXysde4Ncod6DOBCO3gG7VxKQb4P356Cuwjzw/viewform?embedded=true"
+          width="100%"
+          height="820"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          loading="lazy"
+          title="Join the RISE Collective"
+        >Loading form…</iframe>
+      </div>
+
+      <div class="form-center">
+        <button class="rise-submit-btn" onclick="window.open('https://forms.gle/UjXU3JbGZbyGBiwe6','_blank')">Submit</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+<!-- Footer -->
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="experiences.html">Immersions</a></li>
+            <li><a href="rise-collective.html">The RISE Collective</a></li>
+            <li><a href="nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+            <li><a href="terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // ── Smooth scroll CTA ──
+  const joinBtn = document.getElementById('hero-join-btn');
+  if (joinBtn) {
+    joinBtn.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('inner-circle').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ── Mobile flip-card swipeable carousel ──
+  (function() {
+    const isMobile = () => window.innerWidth <= 768;
+    const track = document.getElementById('riseCardsTrack');
+    const dotsContainer = document.getElementById('riseCardDots');
+    if (!track) return;
+
+    const cards = Array.from(track.querySelectorAll('.rise-card'));
+    let currentIndex = 0;
+    let dots = [];
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      dots = cards.map((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'rise-card-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Card ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(d);
+        return d;
+      });
+    }
+
+    function updateDots() {
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+    }
+
+    function getCardWidth() {
+      if (!cards[0]) return 0;
+      const style = window.getComputedStyle(cards[0]);
+      const marginL = parseFloat(style.marginLeft) || 0;
+      const marginR = parseFloat(style.marginRight) || 0;
+      return cards[0].offsetWidth + marginL + marginR;
+    }
+
+    function goTo(index) {
+      cards[currentIndex].classList.remove('flipped');
+      currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+      track.style.transform = 'translateX(-' + (currentIndex * getCardWidth()) + 'px)';
+      updateDots();
+    }
+
+    // Tap to flip
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (!isMobile()) return;
+        card.classList.toggle('flipped');
+      });
+    });
+
+    // Swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (!isMobile()) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 45) goTo(dx < 0 ? currentIndex + 1 : currentIndex - 1);
+    }, { passive: true });
+
+    function initMobile() { buildDots(); goTo(0); }
+    function teardownMobile() { track.style.transform = ''; dotsContainer.innerHTML = ''; }
+
+    let wasMobile = isMobile();
+    if (wasMobile) initMobile();
+
+    window.addEventListener('resize', () => {
+      const now = isMobile();
+      if (now && !wasMobile) { wasMobile = true; initMobile(); }
+      else if (!now && wasMobile) { wasMobile = false; teardownMobile(); }
+      else if (now) { goTo(currentIndex); }
+    });
+  })();
+</script>
+</body>
+</html>
+

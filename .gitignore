@@ -1,0 +1,28 @@
+# Environment variables (Sensitive)
+.env
+.env.*
+*.env
+server/.env
+env.zip
+*.zip
+
+# Dependencies
+node_modules/
+
+# Netlify & hosting cache
+.netlify/
+
+# Local archives and scratch
+changes/
+scratch/
+*.original
+*.recovered
+*.backup.*
+*.tmp
+
+# Operating system / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

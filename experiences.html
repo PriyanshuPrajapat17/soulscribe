@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Immersions — Soulscribe</title>
+<meta name="description" content="Explore our upcoming spiritual journaling immersions — a safe place to ask, heal, and feel understood. Reflect, write, and grow together.">
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Scoped Page Styles for Immersions */
+
+  /* 1. Scroll-driven Hero Section */
+  .scroll-hero-section {
+    position: relative;
+    height: 320vh;
+    background-color: var(--ink);
+  }
+  .scroll-hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 1.5rem;
+    border-radius: 0 0 3rem 3rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  }
+  .scroll-hero-video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .scroll-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8, 30, 48, 0.48) 0%,
+      rgba(8, 30, 48, 0.58) 50%,
+      rgba(8, 30, 48, 0.68) 100%
+    );
+    z-index: 2;
+  }
+  .hero-slides-container {
+    position: relative;
+    width: 100%;
+    max-width: 56rem;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 1.5rem;
+    min-height: 18rem;
+    z-index: 5;
+  }
+  .hero-text-slide {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    will-change: opacity, transform;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hero-text-slide p {
+    margin: 0.6rem 0;
+    font-family: 'Lora', var(--font-display);
+    font-size: clamp(1.85rem, 4.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #ffffff !important;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-scroll-indicator {
+    position: absolute;
+    bottom: 2.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 6;
+    color: #ffffff;
+    opacity: 0.85;
+  }
+
+  /* 2. 3D Vortex Card Carousel Section */
+  .carousel-section {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ink);
+    padding: 5rem 1.5rem 6rem;
+  }
+  .carousel-video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0.35;
+  }
+  .carousel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(8, 30, 48, 0.92) 0%,
+      rgba(10, 36, 56, 0.88) 50%,
+      rgba(8, 30, 48, 0.95) 100%
+    );
+  }
+  .carousel-wrapper {
+    position: relative;
+    max-width: 86rem;
+    margin: 0 auto;
+    z-index: 5;
+  }
+  .carousel-header-title {
+    text-align: center;
+    color: #19b2de !important;
+    font-family: 'Lora', var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* 3D Vortex Scene */
+  .vortex-scene {
+    position: relative;
+    width: 100%;
+    height: 640px;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: pan-y;
+  }
+  @media (max-width: 640px) {
+    .vortex-scene {
+      height: 590px;
+    }
+  }
+
+  .vortex-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+  }
+
+  /* 3D Card */
+  .vortex-card {
+    position: absolute;
+    width: 320px;
+    background: #ffffff;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s ease, filter 0.7s ease;
+    transform-origin: center center;
+    cursor: grab;
+    will-change: transform, opacity;
+  }
+  @media (min-width: 768px) {
+    .vortex-card {
+      width: 360px;
+    }
+  }
+
+  .vortex-card img {
+    width: 100%;
+    aspect-ratio: 1024 / 1536;
+    object-fit: contain;
+    background: #fdfbf7;
+    display: block;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .vortex-card-content {
+    padding: 1.25rem 1.35rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    background: #ffffff;
+    flex-grow: 1;
+    text-align: left;
+  }
+  .vortex-card-title {
+    font-size: 1.3rem;
+    font-family: 'Lora', var(--font-display);
+    font-weight: 600;
+    color: #19b2de !important;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .vortex-card-desc {
+    font-size: 0.92rem;
+    color: #0d3f5a !important;
+    line-height: 1.5;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+  .vortex-card .btn-journey {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    background: linear-gradient(135deg, #ffdd4f 0%, #ffe98f 100%);
+    color: #0d3f5a;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255, 221, 79, 0.35);
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  .vortex-card .btn-journey:hover {
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+  }
+
+  /* Carousel Navigation Buttons */
+  .vortex-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 25;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0d3f5a;
+    border: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .vortex-nav-btn:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+  }
+  .vortex-nav-btn.prev { left: 1rem; }
+  .vortex-nav-btn.next { right: 1rem; }
+  @media (min-width: 1024px) {
+    .vortex-nav-btn.prev { left: -1rem; }
+    .vortex-nav-btn.next { right: -1rem; }
+  }
+
+  /* Vortex Dots */
+  .vortex-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    z-index: 20;
+    position: relative;
+  }
+  .vortex-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, width 0.3s ease;
+    padding: 0;
+  }
+  .vortex-dot.active {
+    background: #ffdd4f;
+    width: 28px;
+  }
+
+  /* Page background */
+  body {
+    background-color: #FFFFF9 !important;
+  }
+
+  /* 3. What to expect features grid */
+  .expect-section {
+    padding: 4.5rem 1.5rem 3.5rem;
+    background-color: #FFFFF9 !important;
+  }
+  .expect-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.5rem 1.5rem;
+    justify-items: center;
+    max-width: 68rem;
+    margin: 3.5rem auto 0;
+  }
+  @media (min-width: 768px) {
+    .expect-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3.5rem 2rem;
+    }
+  }
+  .expect-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 12rem;
+  }
+  /* Requirement: NO yellow circle */
+  .expect-icon-wrapper {
+    width: 5.5rem;
+    height: 5.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .expect-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.04));
+  }
+  .expect-item p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0d3f5a;
+    line-height: 1.4;
+    margin: 0;
+    font-family: var(--font-body);
+  }
+
+  /* 4. Got questions? FAQ Accordions (Consistent with Connect & other pages) */
+  .faq-section {
+    padding: 4.5rem 1.5rem 4rem !important;
+    background-color: #FFFFF9 !important;
+  }
+  .faq-wrap {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+  .faq-title {
+    color: #19b2de !important;
+    font-family: 'Lora', var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    text-align: center !important;
+    margin-bottom: 2rem !important;
+    font-weight: 400;
+  }
+  .faq {
+    border-bottom: 1px solid #ffdd4f !important;
+  }
+  .faq-q {
+    font-size: 1.15rem !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1.15rem 0.25rem !important;
+    background: none !important;
+    border: none !important;
+    text-align: left !important;
+    color: #0d3f5a !important;
+    font-weight: 600 !important;
+    font-family: inherit !important;
+    cursor: pointer !important;
+    gap: 1rem !important;
+    transition: color 0.2s !important;
+  }
+  .faq.open .faq-q {
+    color: #19b2de !important;
+  }
+  .faq-q .chev {
+    transition: transform 0.3s ease !important;
+    flex-shrink: 0 !important;
+    color: #19b2de !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .faq.open .chev {
+    transform: rotate(180deg) !important;
+  }
+  .faq-a {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    transition: grid-template-rows 0.4s ease !important;
+  }
+  .faq.open .faq-a {
+    grid-template-rows: 1fr !important;
+  }
+  .faq-a > div {
+    overflow: hidden !important;
+  }
+  .faq-a p {
+    padding: 0 0.25rem 1.25rem !important;
+    color: #0d3f5a !important;
+    font-size: 1.02rem !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+    font-family: var(--font-body) !important;
+  }
+
+  /* Universal Pricing Removal */
+  .price, .pricing, [data-price], .price-tag, .product-price {
+    display: none !important;
+  }
+
+  /* Premium Feedback Toast */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(8px);
+    border: 1px solid #ffdd4f;
+    color: #0d3f5a;
+    padding: 1.25rem 1.75rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    transform: translateY(120px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+  }
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .toast-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .toast-content h4 {
+    margin: 0 0 0.25rem 0;
+    color: #19b2de;
+    font-size: 1.15rem;
+    font-family: 'Lora', var(--font-display);
+  }
+  .toast-content p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: #0d3f5a;
+  }
+
+  /* Our Immersions at a glance Gallery */
+  .glance-section {
+    padding: 3rem 1.5rem 4rem;
+    background-color: #FFFFF9 !important;
+  }
+  .glance-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 68rem;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .glance-gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+  .glance-card {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--cream, #f5f0e6);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .glance-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  .glance-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky Header Navigation -->
+<div class="sticky-top">
+  <div class="announce"><a href="rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class='brand' href='index.html'><img src="assets/logo 2.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay & Sidebar Drawer Navigation -->
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class='brand' href='index.html'><img src="assets/logo 2.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href='shop.html'>Shop</a>
+    <a href='journaling-journeys.html'>Journaling Journeys</a>
+    <a class='active' href='experiences.html'>Immersions</a>
+    <a href='rise-collective.html'>The RISE Collective</a>
+    <a href='nectar-for-soul.html'>Nectar for the soul</a>
+    <a href='behind-the-bliss.html'>Behind the Bliss</a>
+    <a href='connect.html'>Connect</a>
+  </nav>
+  <div class="drawer-foot">
+    <p>Journal back to bliss.</p>
+    <p>A gentle space to pause, reflect & write.</p>
+  </div>
+</aside>
+
+<!-- Main Page Sections -->
+<main>
+
+  <!-- 1. Scroll-driven Hero Section (3 Slides, Pure White, Video Background, Curved Edge) -->
+  <section class="scroll-hero-section">
+    <div class="scroll-hero-sticky">
+      <!-- Continuous Blue Ocean-Wave Video Background -->
+      <video class="scroll-hero-video-bg" src="assets/exp-ocean-drive.mp4" autoplay muted loop playsinline></video>
+      <div class="scroll-hero-overlay"></div>
+
+      <!-- 3 Centered Pure White Text Slides (No decorative float icons) -->
+      <div class="hero-slides-container">
+        <!-- Slide 1 -->
+        <div class="hero-text-slide" data-slide-index="0">
+          <p>In a chaotic world that moves quickly,</p>
+          <p>we rarely give ourselves the time</p>
+        </div>
+        <!-- Slide 2 (Exact requested text) -->
+        <div class="hero-text-slide" data-slide-index="1">
+          <p>This is a Safe Place to Ask, Heal, and Feel Understood.</p>
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-text-slide" data-slide-index="2">
+          <p>To sit with our thoughts, listen to our hearts,</p>
+          <p>and reflect on what truly matters.</p>
+        </div>
+      </div>
+
+      <!-- Bounce Scroll Down Arrow -->
+      <div class="hero-scroll-indicator drift" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Upcoming Immersions 3D Vortex Card Carousel -->
+  <section class="carousel-section">
+    <video class="carousel-video-bg" src="assets/exp-ocean-drive.mp4" autoplay muted loop playsinline></video>
+    <div class="carousel-overlay"></div>
+    
+    <div class="carousel-wrapper">
+      <div class="reveal">
+        <h2 class="carousel-header-title">Explore Our Upcoming Immersions</h2>
+      </div>
+
+      <!-- 3D Vortex Carousel Container -->
+      <div class="vortex-scene" id="vortexScene">
+        <button aria-label="Previous Immersion" class="vortex-nav-btn prev" id="vortexPrev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+        </button>
+        <button aria-label="Next Immersion" class="vortex-nav-btn next" id="vortexNext">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+
+        <div class="vortex-track" id="vortexTrack">
+          <!-- Card 1: The Gift of Gratitude -->
+          <article class="vortex-card" data-index="0" data-immersion="The Gift of Gratitude">
+            <img src="assets/posters/GIFT OF GRATITUDE.png" alt="The Gift of Gratitude" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">The Gift of Gratitude</h3>
+              <p class="vortex-card-desc">Cultivate a grateful heart and learn to recognize the Lord's grace in everyday life.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="The Gift of Gratitude">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 2: Healing with Grace -->
+          <article class="vortex-card" data-index="1" data-immersion="Healing with Grace">
+            <img src="assets/posters/HEALING WITH GRACE.png" alt="Healing with Grace" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">Healing with Grace</h3>
+              <p class="vortex-card-desc">Gently process difficult emotions and rediscover peace through therapeutic journaling.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="Healing with Grace">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 3: Growing Inside Out -->
+          <article class="vortex-card" data-index="2" data-immersion="Growing Inside Out">
+            <img src="assets/posters/GROWING INSIDE OUT.png" alt="Growing Inside Out" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">Growing Inside Out</h3>
+              <p class="vortex-card-desc">Cultivate timeless spiritual virtues that shape a calmer, kinder, and more purposeful life.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="Growing Inside Out">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 4: Write to Realize -->
+          <article class="vortex-card" data-index="3" data-immersion="Write to Realize">
+            <img src="assets/posters/WRITE TO REALISE 2.png" alt="Write to Realize" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">Write to Realize</h3>
+              <p class="vortex-card-desc">Transform your thoughts into clarity through the gentle practice of intentional journaling</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="Write to Realize">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 5: Letter of Love -->
+          <article class="vortex-card" data-index="4" data-immersion="Letter of Love">
+            <img src="assets/posters/LETTERS OF LOVE 2.png" alt="Letter of Love" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">Letter of Love</h3>
+              <p class="vortex-card-desc">Deepen your relationship with God through heartfelt letters of prayer, shelter, and surrender.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="Letter of Love">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 6: The Journaling Journey -->
+          <article class="vortex-card" data-index="5" data-immersion="The Journaling Journey">
+            <img src="assets/posters/THE journaling journey.png" alt="The Journaling Journey" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">The Journaling Journey</h3>
+              <p class="vortex-card-desc">Build meaningful journaling practices that nurture self-awareness in everyday life.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="The Journaling Journey">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 7: Take the Right Turn -->
+          <article class="vortex-card" data-index="6" data-immersion="Take the Right Turn">
+            <img src="assets/posters/TAKE THE RIGHT TURN.png" alt="Take the Right Turn" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">Take the Right Turn</h3>
+              <p class="vortex-card-desc">Gain clarity for life's decisions by aligning your choices with your values.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="Take the Right Turn">Begin my Journey</a>
+            </div>
+          </article>
+
+          <!-- Card 8: The Inner Compass -->
+          <article class="vortex-card" data-index="7" data-immersion="The Inner Compass">
+            <img src="assets/posters/The Inner Compass.png" alt="The Inner Compass" loading="lazy">
+            <div class="vortex-card-content">
+              <h3 class="vortex-card-title">The Inner Compass</h3>
+              <p class="vortex-card-desc">Reconnect with your authentic self and move through life with greater purpose and direction.</p>
+              <a href="#journey-form-section" class="btn-journey" data-immersion-target="The Inner Compass">Begin my Journey</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Navigation Dots -->
+      <div class="vortex-dots" id="vortexDots"></div>
+    </div>
+  </section>
+
+  <!-- 3. What to expect features grid (8 Icons, 4x2 Desktop, No Yellow Circles) -->
+  <section class="expect-section">
+    <div class="wrap">
+      <div class="reveal">
+        <h2 style="text-align: center; color: #19b2de; font-family: 'Lora', var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: 1rem; font-weight: 400;">What to expect?</h2>
+      </div>
+      <div class="expect-grid">
+        <!-- Item 1 -->
+        <div class="expect-item reveal" data-delay="0">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Meaningful Conversations.png" alt="Meaningful Conversations">
+          </div>
+          <p>Meaningful Conversations</p>
+        </div>
+        <!-- Item 2 -->
+        <div class="expect-item reveal" data-delay="80">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Personal Reflection.png" alt="Personal Reflection">
+          </div>
+          <p>Personal Reflection</p>
+        </div>
+        <!-- Item 3 -->
+        <div class="expect-item reveal" data-delay="160">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Mantra Meditation.png" alt="Mantra Meditation">
+          </div>
+          <p>Mantra Meditation</p>
+        </div>
+        <!-- Item 4 -->
+        <div class="expect-item reveal" data-delay="240">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Deepening Practices ICON.png" alt="Deepening Practices">
+          </div>
+          <p>Deepening Practices</p>
+        </div>
+        <!-- Item 5 -->
+        <div class="expect-item reveal" data-delay="320">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Practical Integration ICON.png" alt="Practical Integration">
+          </div>
+          <p>Practical Integration</p>
+        </div>
+        <!-- Item 6 -->
+        <div class="expect-item reveal" data-delay="400">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/Community Connection.png" alt="Community Connection">
+          </div>
+          <p>Community Connection</p>
+        </div>
+        <!-- Item 7 -->
+        <div class="expect-item reveal" data-delay="480">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/SPIRITUAL GROUDING ICON.png" alt="Spiritual Grounding">
+          </div>
+          <p>Spiritual Grounding</p>
+        </div>
+        <!-- Item 8 -->
+        <div class="expect-item reveal" data-delay="560">
+          <div class="expect-icon-wrapper">
+            <img src="assets/icons/LOTS OF FREEBIES ICON.png" alt="Lots of Freebies">
+          </div>
+          <p>Lots of Freebies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3b. Our Immersions at a glance Gallery Section -->
+  <section class="glance-section" id="immersions-glance">
+    <div class="wrap">
+      <div class="reveal">
+        <h2 style="text-align: center; color: #19b2de; font-family: 'Lora', var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: 2.5rem; font-weight: 400;">Our Immersions at a glance</h2>
+      </div>
+      <div class="glance-gallery-grid">
+        <div class="glance-card reveal" data-delay="0">
+          <img src="assets/immersions/immersion-1.jpg" alt="Our Immersions at a glance 1" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="80">
+          <img src="assets/immersions/immersion-2.jpg" alt="Our Immersions at a glance 2" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="160">
+          <img src="assets/immersions/immersion-3.jpg" alt="Our Immersions at a glance 3" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="240">
+          <img src="assets/immersions/immersion-4.jpg" alt="Our Immersions at a glance 4" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="320">
+          <img src="assets/immersions/immersion-5.jpg" alt="Our Immersions at a glance 5" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="400">
+          <img src="assets/immersions/immersion-6.jpg" alt="Our Immersions at a glance 6" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="480">
+          <img src="assets/immersions/immersion-7.jpg" alt="Our Immersions at a glance 7" loading="lazy">
+        </div>
+        <div class="glance-card reveal" data-delay="560">
+          <img src="assets/immersions/immersion-8.jpg" alt="Our Immersions at a glance 8" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 4. Got questions? FAQ Accordions -->
+  <section class="faq-section">
+    <div class="wrap-sm faq-wrap">
+      <div class="reveal">
+        <h2 class="faq-title">Got questions?</h2>
+      </div>
+      
+      <div class="faq open reveal" data-toggle-group data-delay="0">
+        <button class="faq-q" data-toggle><span>Do I need any prior journaling experience to attend?</span> <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div><p>Not at all. Our immersions are lovingly designed for everyone — from complete beginners picking up a pen for the first time to experienced journalers seeking deeper spiritual grounding.</p></div></div>
+      </div>
+
+      <div class="faq reveal" data-toggle-group data-delay="60">
+        <button class="faq-q" data-toggle><span>What should I bring with me to the immersion?</span> <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div><p>Just yourself and an open, receptive heart. We provide all guided resources, customized reflection materials, and writing companions needed for the session.</p></div></div>
+      </div>
+
+      <div class="faq reveal" data-toggle-group data-delay="120">
+        <button class="faq-q" data-toggle><span>How long does an immersion typically last?</span> <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div><p>Most immersions run for approximately 3 to 4 hours, intentionally paced with gentle stillness, meaningful reflections, mantra meditation, and thoughtful community discussions.</p></div></div>
+      </div>
+
+      <div class="faq reveal" data-toggle-group data-delay="180">
+        <button class="faq-q" data-toggle><span>How do I choose the right immersion for myself or my group?</span> <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="faq-a"><div><p>Choose the theme that calls most tenderly to your current life season — whether cultivating gratitude, healing through grace, or aligning your decisions. You can also take our Soul Quiz or reach out to us directly for tailored guidance.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Begin my Journey - Embedded Google Form Section -->
+  <section id="journey-form-section" class="journey-form-section" style="padding: 4.5rem 1.5rem 6rem; background-color: #FFFFF9;">
+    <div class="wrap-sm" style="max-width: 52rem; margin: 0 auto; text-align: center;">
+      <div class="reveal">
+        <h2 style="color: #19b2de; font-family: 'Lora', var(--font-display); font-size: clamp(2rem, 4.5vw, 2.8rem); line-height: 1.3; margin-bottom: 0.75rem; font-weight: 400;">Begin your Journey</h2>
+        <p style="color: #0d3f5a; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2.25rem; max-width: 36rem; margin-left: auto; margin-right: auto;">Fill out the form below to begin your immersive spiritual journaling journey with Soulscribe.</p>
+      </div>
+      <div class="google-form-container" style="position: relative; width: 100%; border-radius: 1.25rem; overflow: hidden; box-shadow: 0 12px 35px rgba(0,0,0,0.06); background: #ffffff; border: 1px solid rgba(0,0,0,0.05);">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdEI99PjSxS4UH_9Y5FL44PLdQJMoXcXp58VjaPArbkOCs1CQ/viewform?embedded=true" width="100%" height="960" frameborder="0" marginheight="0" marginwidth="0" style="border:none; display: block;" title="Begin my Journey with Soulscribe">Loading…</iframe>
+      </div>
+      <div style="margin-top: 1.75rem;">
+        <a href="https://forms.gle/L9LjZgcYRqXF9Kmj9" target="_blank" rel="noopener noreferrer" class="btn-journey-external" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #19b2de; font-weight: 600; font-size: 0.95rem; text-decoration: none;">
+          <span>Having trouble viewing? Open form in a new tab</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Page Footer -->
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="experiences.html">Immersions</a></li>
+            <li><a href="rise-collective.html">The RISE Collective</a></li>
+            <li><a href="nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+            <li><a href="terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<!-- Success Toast -->
+<div class="toast" id="submitToast" role="alert" aria-live="polite">
+  <span class="toast-icon">💛</span>
+  <div class="toast-content">
+    <h4>Enquiry Received!</h4>
+    <p>We've received your enquiry with gratitude. We'll be in touch soon.</p>
+  </div>
+</div>
+
+<script src="main.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Scroll Hero Slides Fader logic with Continuous Ocean Video
+    const heroSection = document.querySelector(".scroll-hero-section");
+    const slides = document.querySelectorAll(".hero-text-slide");
+    
+    const ranges = [
+      { start: -0.1, peakStart: 0, peakEnd: 0.25, end: 0.38 },
+      { start: 0.25, peakStart: 0.38, peakEnd: 0.58, end: 0.72 },
+      { start: 0.58, peakStart: 0.72, peakEnd: 1.0, end: 1.15 }
+    ];
+
+    const updateHeroSlides = () => {
+      if (!heroSection) return;
+      const rect = heroSection.getBoundingClientRect();
+      const scrollRange = rect.height - window.innerHeight;
+      if (scrollRange <= 0) return;
+      
+      const scrolled = -rect.top;
+      const progress = Math.min(Math.max(scrolled / scrollRange, 0), 1);
+
+      slides.forEach((slide, idx) => {
+        const range = ranges[idx];
+        let opacity = 0;
+        let translateY = 35;
+
+        if (progress >= range.start && progress <= range.end) {
+          if (progress < range.peakStart) {
+            const p = (progress - range.start) / (range.peakStart - range.start);
+            opacity = p;
+            translateY = 35 * (1 - p);
+          } else if (progress <= range.peakEnd) {
+            opacity = 1;
+            translateY = 0;
+          } else {
+            const p = (progress - range.peakEnd) / (range.end - range.peakEnd);
+            opacity = 1 - p;
+            translateY = -35 * p;
+          }
+        } else if (progress > range.end) {
+          opacity = 0;
+          translateY = -35;
+        } else {
+          opacity = 0;
+          translateY = 35;
+        }
+
+        slide.style.opacity = opacity;
+        slide.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+        slide.style.pointerEvents = opacity > 0.1 ? "auto" : "none";
+      });
+    };
+
+    window.addEventListener("scroll", updateHeroSlides, { passive: true });
+    window.addEventListener("resize", updateHeroSlides);
+    updateHeroSlides();
+
+    // 2. 3D Vortex Card Carousel with Auto-Swipe every 3s
+    const scene = document.getElementById("vortexScene");
+    const cards = Array.from(document.querySelectorAll(".vortex-card"));
+    const prevBtn = document.getElementById("vortexPrev");
+    const nextBtn = document.getElementById("vortexNext");
+    const dotsContainer = document.getElementById("vortexDots");
+    const totalCards = cards.length;
+    let currentIndex = 0;
+    let autoSwipeTimer = null;
+
+    // Create dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = "";
+      for (let i = 0; i < totalCards; i++) {
+        const dot = document.createElement("button");
+        dot.className = `vortex-dot ${i === 0 ? "active" : ""}`;
+        dot.setAttribute("aria-label", `Slide ${i + 1}`);
+        dot.addEventListener("click", () => {
+          goToCard(i);
+          resetAutoSwipe();
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    const update3DVortex = () => {
+      const isMobile = window.innerWidth < 640;
+      const xSpacing = isMobile ? 220 : 290;
+      const zSpacing = isMobile ? -90 : -140;
+
+      cards.forEach((card, idx) => {
+        // Calculate shortest cyclic distance
+        let diff = (idx - currentIndex) % totalCards;
+        if (diff > totalCards / 2) diff -= totalCards;
+        if (diff < -totalCards / 2) diff += totalCards;
+
+        const absDiff = Math.abs(diff);
+
+        if (absDiff <= 2) {
+          card.style.display = "flex";
+          const translateX = diff * xSpacing;
+          const translateZ = absDiff * zSpacing;
+          const rotateY = diff * -18; // Inward vortex rotation
+          const scale = Math.max(0.72, 1 - absDiff * 0.14);
+          const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.8 : 0.45;
+          const zIndex = 10 - absDiff;
+
+          card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+          card.style.opacity = opacity;
+          card.style.zIndex = zIndex;
+          card.style.pointerEvents = absDiff === 0 ? "auto" : "none";
+          card.style.filter = absDiff === 0 ? "none" : "brightness(0.85)";
+        } else {
+          card.style.display = "none";
+          card.style.opacity = 0;
+          card.style.zIndex = 0;
+          card.style.pointerEvents = "none";
+        }
+      });
+
+      // Update dots
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll(".vortex-dot");
+        dots.forEach((dot, dIdx) => {
+          dot.classList.toggle("active", dIdx === currentIndex);
+        });
+      }
+    };
+
+    const nextCard = () => {
+      currentIndex = (currentIndex + 1) % totalCards;
+      update3DVortex();
+    };
+
+    const prevCard = () => {
+      currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+      update3DVortex();
+    };
+
+    const goToCard = (idx) => {
+      currentIndex = (idx + totalCards) % totalCards;
+      update3DVortex();
+    };
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        nextCard();
+        resetAutoSwipe();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        prevCard();
+        resetAutoSwipe();
+      });
+    }
+
+    // Auto-swipe every 3 seconds
+    const startAutoSwipe = () => {
+      stopAutoSwipe();
+      autoSwipeTimer = setInterval(nextCard, 3000);
+    };
+
+    const stopAutoSwipe = () => {
+      if (autoSwipeTimer) {
+        clearInterval(autoSwipeTimer);
+        autoSwipeTimer = null;
+      }
+    };
+
+    const resetAutoSwipe = () => {
+      stopAutoSwipe();
+      startAutoSwipe();
+    };
+
+    // Pause on hover
+    if (scene) {
+      scene.addEventListener("mouseenter", stopAutoSwipe);
+      scene.addEventListener("mouseleave", startAutoSwipe);
+
+      // Touch / Swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      scene.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoSwipe();
+      }, { passive: true });
+
+      scene.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const swipeDistance = touchEndX - touchStartX;
+        if (Math.abs(swipeDistance) > 40) {
+          if (swipeDistance < 0) nextCard();
+          else prevCard();
+        }
+        startAutoSwipe();
+      }, { passive: true });
+    }
+
+    update3DVortex();
+    startAutoSwipe();
+    window.addEventListener("resize", update3DVortex);
+
+    // 3. "Begin my Journey" smooth scroll to Google Form section
+    document.querySelectorAll(".btn-journey").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const journeySection = document.getElementById("journey-form-section");
+        if (journeySection) {
+          e.preventDefault();
+          journeySection.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    // 4. Host Form Submission & Dataverse / Google Sheet persistence
+    const form = document.getElementById("immersionForm");
+    const toast = document.getElementById("submitToast");
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const nameVal = document.getElementById("fullName").value.trim();
+        const emailVal = document.getElementById("email").value.trim();
+        const phoneVal = document.getElementById("phone").value.trim();
+        const immersionVal = document.getElementById("immersionSelect").value;
+        const intentVal = document.getElementById("takehomeIntent").value.trim();
+
+        if (!nameVal || !emailVal || !immersionVal) return;
+
+        const submissionData = {
+          name: nameVal,
+          email: emailVal,
+          phone: phoneVal,
+          immersion: immersionVal,
+          intent: intentVal,
+          submittedAt: new Date().toISOString()
+        };
+
+        // Persist locally for Google Sheet / Dataverse compatibility
+        try {
+          const existing = JSON.parse(localStorage.getItem("soulscribe_immersion_submissions") || "[]");
+          existing.push(submissionData);
+          localStorage.setItem("soulscribe_immersion_submissions", JSON.stringify(existing));
+        } catch (err) {
+          console.warn("Storage error:", err);
+        }
+
+        // Webhook hook if configured
+        if (window.SOULSCRIBE_IMMERSION_WEBHOOK) {
+          fetch(window.SOULSCRIBE_IMMERSION_WEBHOOK, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(submissionData)
+          }).catch(() => {});
+        }
+
+        if (toast) {
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 5000);
+        }
+
+        form.reset();
+      });
+    }
+
+    // Helper functions for CSV export
+    window.getImmersionSubmissions = () => JSON.parse(localStorage.getItem("soulscribe_immersion_submissions") || "[]");
+    window.exportImmersionSubmissionsCSV = () => {
+      const data = window.getImmersionSubmissions();
+      if (!data.length) { alert("No submissions yet."); return; }
+      const headers = ["Timestamp", "Name", "Email", "Phone", "Immersion", "Takehome Intent"];
+      const rows = data.map(d => [
+        `"${d.submittedAt}"`,
+        `"${(d.name||'').replace(/"/g, '""')}"`,
+        `"${(d.email||'').replace(/"/g, '""')}"`,
+        `"${(d.phone||'').replace(/"/g, '""')}"`,
+        `"${(d.immersion||'').replace(/"/g, '""')}"`,
+        `"${(d.intent||'').replace(/"/g, '""')}"`
+      ]);
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `immersion_submissions_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    // FAQ accordion toggles are automatically initialized via main.js initToggles()
+  });
+</script>
+
+</body>
+</html>

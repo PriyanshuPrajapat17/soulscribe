@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soulscribe — Pause. Reflect. Evolve.</title>
+<meta name="description" content="World's first spiritual self-care brand. Journaling kits, immersions and a soulful collective.">
+<meta property="og:title" content="Soulscribe — Pause. Reflect. Evolve.">
+<meta property="og:description" content="World's first spiritual self-care brand. Journaling kits, immersions and a soulful collective.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo%202.png">
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+/* ===== HOME PAGE SCOPED STYLES ===== */
+
+/* ---- HERO ---- */
+.home-hero{
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  width: 100%;
+  overflow: hidden;
+}
+.home-hero video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-video-desktop {
+  display: block;
+}
+.hero-video-mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .hero-video-desktop {
+    display: none;
+  }
+  .hero-video-mobile {
+    display: block;
+  }
+}
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.22);
+}
+@media (max-width: 768px) {
+  .home-hero-overlay {
+    background: rgba(0,0,0,0.50);
+  }
+}
+.home-hero-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+.home-hero-title {
+  font-family: "Mifer Holland", var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.home-hero-sub {
+  color: rgba(255,255,255,0.85);
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  max-width: 28rem;
+  margin-bottom: 2.5rem;
+}
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.hero-btn-outline {
+  display: inline-block;
+  padding: 0.85rem 2.25rem;
+  border-radius: 999px;
+  border: 1.5px solid #ffeb97;
+  color: #ffffff;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.hero-btn-outline:hover {
+  background: rgba(255, 235, 151, 0.18);
+  border-color: #ffeb97;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.home-hero-curve {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 10;
+  display: block;
+}
+
+/* ---- TYPEWRITER QUOTE ---- */
+.home-typewriter-section {
+  padding: 1rem 1.5rem 0rem;
+  background: var(--background);
+}
+.home-typewriter-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: var(--teal-accent);
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto;
+  line-height: 1.5;
+  min-height: 3em;
+}
+.home-typewriter-text .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--teal-accent);
+  vertical-align: -0.15em;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---- VIDEO SCROLL-ZOOM ---- */
+.video-scroll-section {
+  position: relative;
+  height: 140vh;
+  background: var(--background);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.video-scroll-sticky {
+  position: sticky;
+  top: 70px;
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: auto;
+}
+.video-scroll-frame {
+  width: 46%;
+  max-width: 1100px;
+  border-radius: 2.25rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+  background: #000;
+  position: relative;
+  transition: width 0.08s linear, border-radius 0.08s linear, box-shadow 0.3s ease;
+  will-change: width, border-radius;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .video-scroll-section {
+    height: auto !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    padding: 0.25rem 0 !important;
+  }
+  .video-scroll-sticky {
+    position: static !important;
+    height: auto !important;
+    min-height: unset !important;
+    display: block !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .video-scroll-frame {
+    width: 90% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 1.25rem;
+  }
+  .home-marquee {
+    margin-top: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    padding: 0.75rem 0 !important;
+  }
+  .begin-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  .begin-section h2 {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
+.video-thumb-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  transition: opacity 0.4s ease;
+  overflow: hidden;
+}
+.video-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Youtube top bar */
+.video-yt-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  z-index: 6;
+}
+.yt-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.yt-title-info {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.yt-title-main {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.4vw, 1.08rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.25;
+}
+.yt-title-sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.85);
+  margin-top: 2px;
+}
+
+/* Youtube center play button */
+.yt-red-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 48px;
+  background: #ff0000;
+  border-radius: 12px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 7;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.video-scroll-frame:hover .yt-red-play-btn {
+  transform: translate(-50%, -50%) scale(1.12);
+  background-color: #cc0000;
+}
+.yt-red-play-btn svg {
+  margin-left: 2px;
+}
+
+/* Youtube bottom bar */
+.video-yt-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 6;
+}
+.yt-bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.yt-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.yt-icon-btn:hover {
+  background: rgba(0,0,0,0.75);
+  transform: scale(1.08);
+}
+.yt-watch-on-btn {
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  padding: 0.5rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.yt-watch-on-btn:hover {
+  background: rgba(0,0,0,0.88);
+  transform: translateY(-1px);
+}
+.yt-watch-on-btn span {
+  font-weight: 700;
+}
+
+/* iframe styling */
+.video-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.video-iframe.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ---- BEGIN WHERE YOU ARE ---- */
+.begin-section {
+  padding: 5rem 1rem 2rem;
+  background: linear-gradient(totop, #e6f7ff, #fffff9);
+}
+.begin-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--teal-accent);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.begin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .begin-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .begin-grid { grid-template-columns: 1fr; }
+}
+.begin-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+.begin-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.begin-card:hover img { transform: scale(1.05); }
+.begin-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(totop, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.30) 55%, rgba(0,0,0,0.20) 100%);
+}
+.begin-card-body {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #fff;
+  gap: 1rem;
+}
+.begin-card-body h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 0;
+  color: #fff;
+}
+.begin-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffdd4f;
+  font-size: 1.5rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.begin-card:hover .begin-card-arrow { transform: translateX(4px); }
+
+/* ---- SOUL QUIZ LINK SECTION ---- */
+.soul-quiz-link-section {
+  padding: 1.5rem 1rem 5rem;
+  background: linear-gradient(tobottom, #e6f7ff, #fffff9);
+}
+.soul-quiz-link-inner {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+.soul-quiz-link-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--teal-accent);
+  margin-bottom: 2rem;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .soul-quiz-link-inner h2 { white-space: normal; }
+}
+.soul-quiz-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  position: relative;
+  padding-bottom: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.soul-quiz-btn::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: #ffdd4f;
+  border-radius: 99px;
+}
+.soul-quiz-btn:hover { color: var(--teal-accent); }
+
+/* ---- MARQUEE STATS ---- */
+.home-marquee {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  overflow: hidden;
+  background: transparent;
+}
+.home-marquee .marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 18s linear infinite;
+  gap: 0;
+}
+.home-marquee .marquee-inner span {
+  padding: 0 1.25rem;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: #0d3f5a;
+  font-weight: 600;
+}
+.home-marquee .marquee-inner .dot {
+  color: #0d3f5a;
+  padding: 0;
+  margin-left: 0;
+}
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- BLESSED / TRUSTED (auto-scrolling marquee of cards) ---- */
+.blessed-section {
+  padding: 5rem 0;
+  overflow: hidden;
+  background: var(--background);
+}
+.blessed-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--teal-accent);
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+.blessed-track-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.blessed-track-wrap::before,
+.blessed-track-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 6rem;
+  z-index: 10;
+  pointer-events: none;
+}
+.blessed-track-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--background), transparent);
+}
+.blessed-track-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--background), transparent);
+}
+.blessed-track {
+  display: flex;
+  gap: 2rem;
+  animation: blessed-scroll 75s linear infinite;
+  width: max-content;
+}
+@keyframes blessed-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.blessed-card {
+  flex-shrink: 0;
+  width: 520px;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s ease;
+}
+@media (min-width: 640px) { .blessed-card { width: 580px; } }
+@media (max-width: 640px) { .blessed-card { width: 88vw; max-width: 420px; } }
+@media (max-width: 768px) {
+  .quiz-section { padding: 3rem 1rem; }
+  .blessed-section { padding: 2.5rem 0 2rem; }
+  .blessed-section h2 { margin-bottom: 1.5rem; }
+  .blessed-read-more { margin-top: 1.5rem; }
+  .instagram-section { padding: 2.5rem 1rem 2rem; }
+}
+.blessed-card-img {
+  width: 100%;
+  overflow: hidden;
+  background: #fdfdfd;
+  line-height: 0;
+}
+.blessed-card-img img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+}
+.blessed-read-more {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 0 1rem;
+}
+.blessed-read-more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.875rem;
+}
+.blessed-read-more a:hover svg {
+  transform: translateX(3px);
+}
+.blessed-read-more a svg {
+  transition: transform 0.2s;
+}
+
+/* ---- INSTAGRAM FEED WIDGET ---- */
+.instagram-section {
+  padding: 5rem 1rem 4rem;
+  background: var(--background);
+  position: relative;
+}
+.ig-widget-card {
+  max-width: 76rem;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid rgba(19, 179, 223, 0.18);
+  border-radius: 1.5rem;
+  padding: 2.25rem 2rem 2rem;
+  box-shadow: 0 16px 45px -10px rgba(13, 63, 90, 0.08);
+}
+.ig-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.75rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(13, 63, 90, 0.08);
+}
+.ig-profile-block {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.ig-avatar-wrapper {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+}
+.ig-avatar-wrapper:hover {
+  transform: rotate(6deg) scale(1.05);
+}
+.ig-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+  padding: 4px;
+}
+.ig-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(220, 39, 67, 0.5);
+  animation: igPulse 2.5s infinite;
+  pointer-events: none;
+}
+@keyframes igPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+.ig-profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.ig-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.ig-handle-link {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0d3f5a;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s ease;
+}
+.ig-handle-link:hover {
+  color: #13b3df;
+}
+.ig-verified-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+}
+.ig-badge-tag {
+  background: rgba(19, 179, 223, 0.12);
+  color: #0d3f5a;
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.ig-bio-text {
+  font-size: 0.925rem;
+  color: #5a7382;
+  margin: 0;
+  line-height: 1.4;
+}
+.ig-action-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ig-follow-button {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.925rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ig-follow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(220, 39, 67, 0.4);
+}
+.ig-follow-button svg {
+  flex-shrink: 0;
+}
+.instagram-grid:empty {
+  display: none !important;
+}
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+  margin: 0 auto;
+}
+#behold-feed {
+  margin: 0 0 1.5rem 0;
+  width: 100%;
+}
+#behold-feed:empty {
+  display: none;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .instagram-grid:empty {
+  display: none !important;
+}
+.instagram-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.85rem !important;
+    padding-bottom: 0.75rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .instagram-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .instagram-post {
+    flex: 0 0 72% !important;
+    max-width: 280px !important;
+    scroll-snap-align: center !important;
+  }
+  .ig-widget-card {
+    padding: 1.5rem 1rem 1.5rem !important;
+    border-radius: 1.25rem !important;
+  }
+}
+.ig-follow-under-grid {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.instagram-post {
+  display: block;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid rgba(13, 63, 90, 0.1);
+  background: #f0f4f7;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(13, 63, 90, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.instagram-post:hover {
+  transform: translateY(-4px);
+  border-color: rgba(19, 179, 223, 0.4);
+  box-shadow: 0 10px 25px rgba(13, 63, 90, 0.15);
+}
+.instagram-post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+  display: block;
+}
+.instagram-post:hover img {
+  transform: scale(1.08);
+}
+.instagram-post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 63, 90, 0.4);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+.instagram-post:hover .instagram-post-overlay {
+  opacity: 1;
+}
+.ig-overlay-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0d3f5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease;
+}
+.instagram-post:hover .ig-overlay-icon {
+  transform: scale(1.1);
+}
+.ig-widget-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  text-align: center;
+  border-top: 1px solid rgba(13, 63, 90, 0.06);
+}
+.ig-widget-footer p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6a808e;
+}
+.ig-widget-footer a {
+  color: #13b3df;
+  font-weight: 600;
+  text-decoration: none;
+}
+.ig-widget-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---- SOUL QUIZ SECTION ---- */
+.quiz-section {
+  background: linear-gradient(180deg, #e6f7ff 0%, #f9fdff 50%, #fffff9 100%);
+  padding: 6rem 1.5rem;
+}
+.quiz-inner { max-width: 68rem; margin: 0 auto; text-align: center; }
+.quiz-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--teal-accent);
+  margin-bottom: 0.75rem;
+}
+.quiz-sub { color: rgba(13,63,90,0.7); font-size: 1rem; margin-bottom: 2rem; }
+.quiz-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: #ffffff;
+  border-radius: 999px;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.quiz-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.quiz-panel { overflow: hidden; max-height: 0; transition: max-height 0.6s cubic-bezier(0.4,0,0.2,1); }
+.quiz-panel.open { max-height: 3600px; }
+.quiz-body { padding-top: 2.5rem; text-align: left; }
+.quiz-progress-bar { height: 4px; background: var(--sun-soft); border-radius: 99px; margin-bottom: 2rem; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: var(--teal-accent); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+.quiz-q-num { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal-accent); font-weight: 600; margin-bottom: 0.5rem; }
+.quiz-q-text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--ink); margin-bottom: 1.5rem; line-height: 1.35; }
+.quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+.quiz-option {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 0.85rem 1.25rem;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  background: rgba(255,255,255,0.7);
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 0.95rem; color: var(--ink);
+}
+.quiz-option:hover { border-color: var(--teal-accent); background: rgba(25,178,222,0.05); }
+.quiz-option.selected { border-color: var(--teal-accent); background: rgba(25,178,222,0.08); }
+.quiz-option-letter {
+  width: 2rem; height: 2rem; border-radius: 999px;
+  background: var(--sun-soft); display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.8rem; color: var(--ink); flex-shrink: 0; transition: background 0.2s;
+}
+.quiz-option.selected .quiz-option-letter { background: var(--teal-accent); color: #fff; }
+.quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
+.quiz-btn-back { padding: 0.6rem 1.5rem; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 999px; background: transparent; color: rgba(13,63,90,0.6); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; transition: border-color 0.2s; }
+.quiz-btn-back:hover { border-color: var(--ink); color: var(--ink); }
+.quiz-btn-next { padding: 0.7rem 2rem; background: var(--teal-accent); color: #fff; border: none; border-radius: 999px; font-family: var(--font-body); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.quiz-btn-next:hover { background: var(--ink); }
+.quiz-btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+.quiz-results { display: none; padding-top: 2rem; text-align: center; }
+.quiz-results.visible { display: block; }
+.quiz-result-heading { font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--teal-accent); margin-bottom: 0.5rem; }
+.quiz-result-sub { color: rgba(13,63,90,0.7); margin-bottom: 2rem; }
+.quiz-result-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2rem; text-align: left; }
+@media (max-width: 900px) { .quiz-result-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .quiz-result-grid { grid-template-columns: 1fr; } }
+.quiz-result-card { background: #fff; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.07); transition: transform 0.2s; }
+.quiz-result-card:hover { transform: translateY(-4px); }
+.quiz-result-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+.quiz-result-card-body { padding: 0.875rem 1rem; text-align: center; }
+.quiz-result-card-body h4 { font-size: 1rem; color: var(--ink); margin-bottom: 0.75rem; }
+.quiz-result-card-body a { 
+  display: inline-block; 
+  padding: 0.5rem 1.5rem; 
+  font-size: 0.875rem; 
+  font-weight: 600; 
+  text-decoration: none; 
+}
+.quiz-retake { margin-top: 1rem; background: transparent; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 999px; padding: 0.6rem 1.75rem; font-family: var(--font-body); font-size: 0.875rem; color: var(--ink); cursor: pointer; transition: border-color 0.2s; }
+.quiz-retake:hover { border-color: var(--teal-accent); }
+</style>
+</head>
+<body>
+
+<!-- Sticky Header -->
+<div class="sticky-top">
+  <div class="announce"><a href="rise-collective.html" style="color:inherit; text-decoration:none; display:block; width:100%;">Join us at the RISE Collective — an online space to pause, reflect, and journal together!</a></div>
+  <div class="soulscribe-header">
+    <div class="left">
+      <button class="icon-btn" data-open-menu aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    </div>
+    <div class="right">
+      <a class="icon-btn" href="login.html" aria-label="Account" title="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+      <button class="icon-btn" data-open-cart aria-label="Cart" title="Cart"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button>
+    </div>
+  </div>
+</div>
+<div class="overlay" data-overlay></div>
+<aside class="drawer" data-drawer>
+  <div class="drawer-head">
+    <a class="brand" href="index.html"><img src="assets/logo%202.png" alt="Soulscribe logo"><span style="font-family: 'Mifer Holland', var(--font-display);">Soulscribe</span></a>
+    <button class="icon-btn" data-close-menu aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav>
+    <a href="shop.html">Shop</a>
+    <a href="journaling-journeys.html">Journaling Journeys</a>
+    <a href="experiences.html">Immersions</a>
+    <a href="rise-collective.html">The RISE Collective</a>
+    <a href="nectar-for-soul.html">Nectar for the soul</a>
+    <a href="behind-the-bliss.html">Behind the Bliss</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+  <div class="drawer-foot"><p>Journal back to bliss.</p><p>A gentle space to pause, reflect &amp; write.</p></div>
+</aside>
+
+<main>
+
+  <!-- ===== 1. HERO ===== -->
+  <section class="home-hero" aria-label="Hero">
+    <video class="hero-video-desktop" src="assets/hero%20video/desktop%20HERO%20FOR%20HOME%20PGAE%201O%20SEC%20LOOP.mp4" autoplay loop muted playsinline></video>
+    <video class="hero-video-mobile" src="assets/hero%20video/MOBILE%20HERO%20FOR%20HOME%20PGAE%201O%20SEC%20LOOP.mp4" autoplay loop muted playsinline></video>
+    <div class="home-hero-overlay"></div>
+    <div class="home-hero-content">
+      <h1 class="home-hero-title">Pause.<br>Reflect. Evolve.</h1>
+      <p class="home-hero-sub">World's first spiritual self-care brand</p>
+      <div class="hero-btns">
+        <a href="shop.html" class="hero-btn-outline">Explore Journaling Kits</a>
+      </div>
+    </div>
+    <svg class="home-hero-curve" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none"><path fill="var(--background)" d="M0,0 C480,120 960,120 1440,0 L1440,120 L0,120 Z"></path></svg>
+  </section>
+
+  <!-- ===== 2. TYPEWRITER QUOTE ===== -->
+  <section class="home-typewriter-section" aria-label="Inspired quote">
+    <p class="home-typewriter-text" id="typewriterText"><span class="cursor"></span></p>
+  </section>
+
+  <!-- ===== 3. VIDEO (SCROLL-ENLARGING PLACEHOLDER) ===== -->
+  <section class="video-scroll-section" id="videoScrollSection">
+    <div class="video-scroll-sticky" id="videoScrollSticky">
+      <div class="video-scroll-frame" id="videoScrollFrame">
+        <div class="video-thumb-container" id="videoThumbContainer">
+          <img src="assets/thumbnail%20for%20shot%20film%20soulscribe.png" alt="Every soul's story | A short film by Soulscribe" class="video-thumb-img">
+          <div class="video-yt-top">
+            <img src="assets/logo%202.png" alt="Soulscribe" class="yt-avatar">
+            <div class="yt-title-info">
+              <div class="yt-title-main">Every soul's story | A short film by Soulscribe</div>
+              <div class="yt-title-sub">Soulscribe</div>
+            </div>
+          </div>
+          <button class="yt-red-play-btn" id="ytRedPlayBtn" aria-label="Play video">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="video-yt-bottom">
+            <div class="yt-bottom-left">
+              <button class="yt-icon-btn" title="Share" aria-label="Share" onclick="event.stopPropagation(); if (navigator.share) { navigator.share({title: 'Every soul\'s story', url: 'https://www.youtube.com/watch?v=pRTMos7b0TM'}); } else { navigator.clipboard.writeText('https://www.youtube.com/watch?v=pRTMos7b0TM'); alert('Link copied to clipboard!'); }"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
+              <button class="yt-icon-btn" title="Watch later" aria-label="Watch later" onclick="event.stopPropagation(); alert('Added to Watch Later!');"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></button>
+            </div>
+            <a href="https://www.youtube.com/watch?v=pRTMos7b0TM" target="_blank" rel="noopener" class="yt-watch-on-btn" id="ytWatchOnBtn" onclick="event.stopPropagation();">Watch on <svg width="20" height="14" viewBox="0 0 24 17" fill="red"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000"/><path d="M9.545 11.568V4.432L15.818 8l-6.273 3.568z" fill="#FFFFFF"/></svg> <span>YouTube</span></a>
+          </div>
+        </div>
+        <iframe id="videoIframe" class="video-iframe" src="" title="Every soul's story | A short film by Soulscribe" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. MARQUEE STATS ===== -->
+  <div class="home-marquee" aria-hidden="true">
+    <div class="marquee-inner">
+      <span>5000 souls served</span><span class="dot">•</span>
+      <span>22 cities reached</span><span class="dot">•</span>
+      <span>45 immersions</span><span class="dot">•</span>
+      <span>72000 pages written</span><span class="dot">•</span>
+      <span>5000 souls served</span><span class="dot">•</span>
+      <span>22 cities reached</span><span class="dot">•</span>
+      <span>45 immersions</span><span class="dot">•</span>
+      <span>72000 pages written</span><span class="dot">•</span>
+    </div>
+  </div>
+
+  <!-- ===== 4. BEGIN WHERE YOU ARE ===== -->
+  <section class="begin-section" style="background: linear-gradient(180deg, #fffff9 0%, #e6f7ff 100%); padding: 5rem 1.5rem;">
+    <h2 style="color:#13b3df; text-align:center; font-size:clamp(2rem, 5vw, 3.2rem); margin-bottom:3rem;">Begin where you are</h2>
+    <div class="begin-grid">
+      <a class="begin-card" href="experiences.html">
+        <img src="assets/images/2 homepage - experience an immersion.png" alt="Experience an Immersion" loading="lazy">
+        <div class="begin-card-overlay"></div>
+        <div class="begin-card-body">
+          <h3>Experience an Immersion</h3>
+          <span class="begin-card-arrow">→</span>
+        </div>
+      </a>
+      <a class="begin-card" href="shop.html">
+        <img src="assets/images/1 homepage - explore journaling kits.png" alt="Explore Journaling Kits" loading="lazy">
+        <div class="begin-card-overlay"></div>
+        <div class="begin-card-body">
+          <h3>Explore Journaling Kits</h3>
+          <span class="begin-card-arrow">→</span>
+        </div>
+      </a>
+      <a class="begin-card" href="rise-collective.html">
+        <img src="assets/images/3 home page- engage with souls.png" alt="Engage with Souls" loading="lazy">
+        <div class="begin-card-overlay"></div>
+        <div class="begin-card-body">
+          <h3>Engage with Souls</h3>
+          <span class="begin-card-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== 9. SOUL QUIZ (expanded) ===== -->
+  <section class="quiz-section" id="quizSection" style="background: linear-gradient(180deg, #e6f7ff 0%, #fffff9 100%);">
+    <div class="quiz-inner">
+      <h2 class="quiz-heading">Not sure where to begin?</h2>
+      <p class="quiz-sub">Answer 8 gentle questions and we'll guide you to your perfect journaling practice.</p>
+      <button class="quiz-toggle-btn" id="quizToggleBtn">
+        Take the Soul Quiz &nbsp;✦
+      </button>
+
+      <div class="quiz-panel" id="quizPanel">
+        <div class="quiz-body">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgress"></div></div>
+
+          <!-- Step 1 -->
+          <div class="quiz-step active" data-step="0">
+            <p class="quiz-q-num">Question 1 of 8</p>
+            <h3 class="quiz-q-text">How often do you journal?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q0" value="A" hidden>Never</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q0" value="B" hidden>Rarely.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q0" value="C" hidden>I have many goals but struggle to execute them.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q0" value="D" hidden>I often wonder why I think and act the way I do.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q0" value="E" hidden>I want a healthier and more balanced lifestyle.</label>
+            </div>
+            <div class="quiz-nav"><span></span><button class="quiz-btn-next" data-step="0" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="quiz-step" data-step="1">
+            <p class="quiz-q-num">Question 2 of 8</p>
+            <h3 class="quiz-q-text">Which statement sounds most like you?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q1" value="A" hidden>I want to appreciate life more deeply.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q1" value="B" hidden>I wish I could express what's in my heart.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q1" value="C" hidden>I have many goals but struggle to execute them.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q1" value="D" hidden>I often wonder why I think and act the way I do.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q1" value="E" hidden>I want a healthier and more balanced lifestyle.</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="1" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="quiz-step" data-step="2">
+            <p class="quiz-q-num">Question 3 of 8</p>
+            <h3 class="quiz-q-text">When life becomes overwhelming, what do you seek most?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q2" value="A" hidden>A reminder of life's blessings.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q2" value="B" hidden>Comfort, healing, and emotional support.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q2" value="C" hidden>Structure and a practical plan.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q2" value="D" hidden>Time to think and process deeply.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q2" value="E" hidden>Rest, balance, and inner peace.</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="2" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="quiz-step" data-step="3">
+            <p class="quiz-q-num">Question 4 of 8</p>
+            <h3 class="quiz-q-text">What is your favourite well-being practice?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q3" value="A" hidden>Connecting with like-minded souls</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q3" value="B" hidden>Prayer and meditation.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q3" value="C" hidden>Refreshing Spiritual Activities</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q3" value="D" hidden>Wisdom intake and Reading.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q3" value="E" hidden>Exercise and wellness habits.</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="3" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="quiz-step" data-step="4">
+            <p class="quiz-q-num">Question 5 of 8</p>
+            <h3 class="quiz-q-text">What are you seeking most in this season of your life?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q4" value="A" hidden>Joy and Connection</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q4" value="B" hidden>Healing and Self Expression.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q4" value="C" hidden>Purpose and momentum.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q4" value="D" hidden>Clarity and inner well-being.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q4" value="E" hidden>Inner emotional and mental Balance</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="4" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="quiz-step" data-step="5">
+            <p class="quiz-q-num">Question 6 of 8</p>
+            <h3 class="quiz-q-text">If the Lord gifted you one blessing today, what would you choose?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q5" value="A" hidden>A grateful heart.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q5" value="B" hidden>An emotionally strong heart.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q5" value="C" hidden>A focused mind.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q5" value="D" hidden>Wisdom &amp; intelligence.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q5" value="E" hidden>A peaceful life.</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="5" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 7 -->
+          <div class="quiz-step" data-step="6">
+            <p class="quiz-q-num">Question 7 of 8</p>
+            <h3 class="quiz-q-text">How do you currently deal with stress or brain fog?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q6" value="A" hidden>I try to see the good side.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q6" value="B" hidden>I pray directly to God.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q6" value="C" hidden>I break down heavy tasks intobaby steps.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q6" value="D" hidden>I try to analyse what's happening within</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q6" value="E" hidden>I engage in small acts of self-care.</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next" data-step="6" disabled>Next →</button></div>
+          </div>
+
+          <!-- Step 8 -->
+          <div class="quiz-step" data-step="7">
+            <p class="quiz-q-num">Question 8 of 8</p>
+            <h3 class="quiz-q-text">When do you usually find time for yourself during the day?</h3>
+            <div class="quiz-options">
+              <label class="quiz-option"><span class="quiz-option-letter">A</span><input type="radio" name="q7" value="A" hidden>Early morning, before the world wakes up.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">B</span><input type="radio" name="q7" value="B" hidden>Late evening, after all my tasks are done.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">C</span><input type="radio" name="q7" value="C" hidden>During breaks between work or chores.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">D</span><input type="radio" name="q7" value="D" hidden>I haven't figured out a routine yet.</label>
+              <label class="quiz-option"><span class="quiz-option-letter">E</span><input type="radio" name="q7" value="E" hidden>I usually never find time for myself</label>
+            </div>
+            <div class="quiz-nav"><button class="quiz-btn-back">←  Back</button><button class="quiz-btn-next quiz-submit" data-step="7" disabled>See my results ✦</button></div>
+          </div>
+
+          <!-- Results -->
+          <div class="quiz-results" id="quizResults">
+            <h3 class="quiz-result-heading" id="resultHeading">Your perfect practice awaits ✦</h3>
+            <p class="quiz-result-sub" id="resultSub">Based on your answers, these Soulscribe offerings are made for you:</p>
+            <div class="quiz-result-grid" id="resultGrid"></div>
+            <button class="quiz-retake" id="quizRetake">Retake the quiz</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. TRUSTED BY THOUGHT LEADERS WORLDWIDE ===== -->
+  <section class="blessed-section">
+    <h2 style="color:#13b3df; font-size:clamp(1.8rem, 4vw, 3rem); text-align:center;">Trusted by Thought Leaders Worldwide</h2>
+    <div class="blessed-track-wrap">
+      <div class="blessed-track">
+        <!-- Set 1 (15 Testimonial Slides) -->
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/81.jpg" alt="Testimonial 1" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/82.jpg" alt="Testimonial 2" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/83.jpg" alt="Testimonial 3" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/84.jpg" alt="Testimonial 4" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/85.jpg" alt="Testimonial 5" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/86.jpg" alt="Testimonial 6" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/87.jpg" alt="Testimonial 7" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/88.jpg" alt="Testimonial 8" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/89.jpg" alt="Testimonial 9" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/90.jpg" alt="Testimonial 10" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/91.jpg" alt="Testimonial 11" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/92.jpg" alt="Testimonial 12" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/93.jpg" alt="Testimonial 13" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/94.jpg" alt="Testimonial 14" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/95.jpg" alt="Testimonial 15" loading="lazy"></div></div>
+
+        <!-- Set 2 (duplicate for seamless infinite loop) -->
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/81.jpg" alt="Testimonial 1" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/82.jpg" alt="Testimonial 2" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/83.jpg" alt="Testimonial 3" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/84.jpg" alt="Testimonial 4" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/85.jpg" alt="Testimonial 5" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/86.jpg" alt="Testimonial 6" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/87.jpg" alt="Testimonial 7" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/88.jpg" alt="Testimonial 8" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/89.jpg" alt="Testimonial 9" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/90.jpg" alt="Testimonial 10" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/91.jpg" alt="Testimonial 11" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/92.jpg" alt="Testimonial 12" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/93.jpg" alt="Testimonial 13" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/94.jpg" alt="Testimonial 14" loading="lazy"></div></div>
+        <div class="blessed-card"><div class="blessed-card-img"><img src="assets/testimonials%20for%20home%20pg/95.jpg" alt="Testimonial 15" loading="lazy"></div></div>
+      </div>
+    </div>
+    <div class="blessed-read-more">
+      <a href="journaling-journeys.html" class="btn-gradient">Read more journaling journeys <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- ===== 8. INSTAGRAM FEED WIDGET ===== -->
+  <section class="instagram-section" id="instagram-feed">
+    <div class="ig-widget-card">
+      <!-- Widget Header Bar -->
+      <div class="ig-widget-header">
+        <div class="ig-profile-block">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener noreferrer" class="ig-avatar-wrapper" aria-label="Visit Soulscribe on Instagram">
+            <span class="ig-pulse-ring"></span>
+            <img src="assets/logo.png" alt="Soulscribe Instagram" class="ig-avatar-img">
+          </a>
+          <div class="ig-profile-details">
+            <div class="ig-title-row">
+              <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener noreferrer" class="ig-handle-link">
+                soulscribe.official
+                <svg class="ig-verified-icon" viewBox="0 0 24 24" fill="#13b3df">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.2 14.2l-3.5-3.5 1.4-1.4 2.1 2.1 5.3-5.3 1.4 1.4-6.7 6.7z"/>
+                </svg>
+              </a>
+              <span class="ig-badge-tag">Official Feed</span>
+            </div>
+            <p class="ig-bio-text">Mindful &amp; Spiritual Journaling • A sacred pause in your day ✨</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hosted Live-Feed Widget (Behold.so) — Replace YOUR_WIDGET_ID with your Behold Feed ID -->
+      <figure data-behold-id="YOUR_WIDGET_ID" id="behold-feed"></figure>
+      <script>
+        (function() {
+          var b = document.getElementById('behold-feed');
+          var id = b ? b.getAttribute('data-behold-id') : null;
+          if (id && id !== 'YOUR_WIDGET_ID' && id.trim() !== '') {
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = 'https://w.behold.so/widget.js';
+            document.head.appendChild(s);
+          }
+        })();
+      </script>
+
+      <!-- Live Dynamic Instagram Grid (Auto-populated dynamically; no hardcoded posts) -->
+      <div class="instagram-grid" id="instagram-grid"></div>
+
+      <!-- Follow us on Instagram button under the feed grid -->
+      <div class="ig-follow-under-grid">
+        <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener noreferrer" class="ig-follow-button" id="ig-follow-cta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          <span>Follow us on Instagram</span>
+        </a>
+      </div>
+
+      <!-- Widget Footer Bar -->
+      <div class="ig-widget-footer">
+        <p>Tag <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener noreferrer">@soulscribe.official</a> or use <strong>#SoulscribeJournal</strong> to be featured on our page ✨</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+</main>
+
+<footer>
+  <div class="footer-wave" aria-hidden="true"></div>
+  <div class="footer-body">
+    <div class="wrap footer-grid">
+      <div class="reveal">
+        <h3>Stay Connected</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="Email address" required>
+        </form>
+        <p class="note">Receive seeds of wisdom, gentle reflections, journaling prompts and little nudges to pause and reconnect.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/soulscribe.official/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://wa.me/7710032909" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0d3f5a" xmlns="http://www.w3.org/2000/svg"><path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.11-.22-.16-.47-.28z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61558262848320" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="100">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Quick Links <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="journaling-journeys.html">Journaling Journeys</a></li>
+            <li><a href="experiences.html">Immersions</a></li>
+            <li><a href="rise-collective.html">The RISE Collective</a></li>
+            <li><a href="nectar-for-soul.html">Nectar for the Soul</a></li>
+            <li><a href="behind-the-bliss.html">Behind the Bliss</a></li>
+            <li><a href="connect.html">Connect</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal" data-delay="200">
+        <button class="footer-accordion-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Policies <span>+</span></button>
+        <div class="footer-accordion-body">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="terms.html#promise">Soulscribe Purchase Promise</a></li>
+            <li><a href="terms.html">Terms and Conditions</a></li>
+            <li><a href="terms.html#privacy">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h2 class="footer-big float">Journal Back to Bliss</h2>
+    <p class="footer-copy">All rights reserved © Soulscribe</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// ===== TYPEWRITER EFFECT =====
+(function() {
+  const quotes = [
+    "Sometimes the answers we're searching for are already within us — we simply need the courage to sit with a blank page long enough to hear them.",
+    "Journaling is the art of meeting yourself exactly where you are.",
+    "Every page you fill is a step closer to the version of you that was always waiting to emerge.",
+  ];
+  const el = document.getElementById('typewriterText');
+  if (!el) return;
+  let qi = 0, ci = 0, deleting = false, pause = 0;
+  const cursor = el.querySelector('.cursor');
+  function tick() {
+    const q = quotes[qi];
+    if (!deleting) {
+      ci++;
+      el.textContent = q.slice(0, ci);
+      el.appendChild(cursor);
+      if (ci === q.length) { deleting = true; pause = 2200; }
+      setTimeout(tick, deleting && pause > 0 ? pause : 45);
+      pause = 0;
+    } else {
+      ci--;
+      el.textContent = q.slice(0, ci);
+      el.appendChild(cursor);
+      if (ci === 0) { deleting = false; qi = (qi + 1) % quotes.length; }
+      setTimeout(tick, 22);
+    }
+  }
+  setTimeout(tick, 600);
+})();
+
+// ===== VIDEO SCROLL ENLARGE & PLAY =====
+(function() {
+  const section = document.getElementById('videoScrollSection');
+  const frame   = document.getElementById('videoScrollFrame');
+  const thumbContainer = document.getElementById('videoThumbContainer');
+  const iframe  = document.getElementById('videoIframe');
+  const redPlayBtn = document.getElementById('ytRedPlayBtn');
+
+  if (!section || !frame) return;
+
+  let ticking = false;
+  let maxP = 0;
+
+  function updateFrameOnScroll() {
+    if (window.innerWidth <= 768) {
+      frame.style.width = '';
+      frame.style.borderRadius = '';
+      ticking = false;
+      return;
+    }
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    
+    // Calculate scroll progress p within section
+    const totalScrollable = rect.height - windowHeight;
+    if (totalScrollable <= 0) return;
+
+    const scrolled = -rect.top;
+    let p = scrolled / totalScrollable;
+    p = Math.max(0, Math.min(1, p));
+
+    // One-way enlarge: only enlarge on scroll down, lock at maxP once enlarged
+    if (p > maxP) maxP = p;
+    const effectiveP = maxP;
+
+    const isMobile = window.innerWidth <= 768;
+    const startWidth  = isMobile ? 85 : 46;
+    const endWidth    = isMobile ? 96 : 90;
+    const startRadius = isMobile ? 1.5 : 2.5;
+    const endRadius   = isMobile ? 0.75 : 1.25;
+
+    const currentWidth  = startWidth + (endWidth - startWidth) * effectiveP;
+    const currentRadius = startRadius - (startRadius - endRadius) * effectiveP;
+
+    frame.style.width = currentWidth.toFixed(2) + '%';
+    frame.style.borderRadius = currentRadius.toFixed(2) + 'rem';
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateFrameOnScroll);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  updateFrameOnScroll();
+
+  function playVideo() {
+    if (!iframe.src || iframe.src === 'about:blank' || iframe.src.indexOf('autoplay=1') === -1) {
+      iframe.src = 'https://www.youtube.com/embed/pRTMos7b0TM?autoplay=1&rel=0';
+    }
+    thumbContainer.style.opacity = '0';
+    setTimeout(function() {
+      thumbContainer.style.display = 'none';
+      iframe.classList.add('visible');
+    }, 350);
+  }
+
+  if (redPlayBtn) redPlayBtn.addEventListener('click', function(e) { e.stopPropagation(); playVideo(); });
+  if (thumbContainer) thumbContainer.addEventListener('click', playVideo);
+})();
+
+// ===== QUIZ LINK BUTTON =====
+(function() {
+  const quizLinkBtn = document.getElementById('quizLinkBtn');
+  const quizSection = document.getElementById('quizSection');
+  const panel = document.getElementById('quizPanel');
+  const toggleBtn = document.getElementById('quizToggleBtn');
+  if (quizLinkBtn) {
+    quizLinkBtn.addEventListener('click', function() {
+      quizSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(function() {
+        if (!panel.classList.contains('open')) {
+          panel.classList.add('open');
+          toggleBtn.textContent = 'Close the quiz';
+        }
+      }, 600);
+    });
+  }
+})();
+
+// ===== SOUL QUIZ =====
+(function() {
+  const toggleBtn = document.getElementById('quizToggleBtn');
+  const panel     = document.getElementById('quizPanel');
+  const progress  = document.getElementById('quizProgress');
+  const results   = document.getElementById('quizResults');
+  const retake    = document.getElementById('quizRetake');
+  const TOTAL     = 8;
+  let current     = 0;
+  const answers   = new Array(TOTAL).fill(null);
+
+  const PRODUCTS = {
+    A: [
+      { name: 'Thank You Krishna', img: 'assets/product_photos/THANKYOU%20KRISHNA%20JOURNALING%20KIT/mockup%20-%201st%20photo.png', url: 'product/thankyou-krishna.html' },
+      { name: 'A Day to Connect with Krishna', img: 'assets/product_photos/POCKET%20PLANNERS/DO%20IT%20FOR%20KRSNA_prod%20photo.png', url: 'product/daily-bliss-planner.html' },
+      { name: 'Daily Soulful Reflection', img: 'assets/product_photos/PLANNERS/SADHANA%20IN%20SYNC_prod%20photo.png', url: 'product/detail.html?handle=sadhana-in-sync' },
+      { name: 'Soulful Self-Care Checklist', img: 'assets/product_photos/PLANNERS/SOULFUL%20SELF%20CARE%20CHECKLIST_prod%20photo.png', url: 'product/detail.html?handle=soulful-self-care-checklist' }
+    ],
+    B: [
+      { name: 'Prayers from Within', img: 'assets/product_photos/PRAYERS%20FROM%20WITHING%20JOURNALING%20KIT/mockup.png', url: 'product/prayers-from-within.html' },
+      { name: 'Mercy in Meltdowns', img: 'assets/product_photos/MERCY%20AND%20MELTFDOWNS%20JOURNALING%20KIT/MOCK.png', url: 'product/mercy-and-meltdowns.html' },
+      { name: 'Do It for Krishna', img: 'assets/product_photos/POCKET%20PLANNERS/DO%20IT%20FOR%20KRSNA_prod%20photo.png', url: 'product/detail.html?handle=do-it-for-krsna' },
+      { name: 'Balance in Being', img: 'assets/product_photos/PLANNERS/BALANCE%20IN%20BEING_prod%20photo.png', url: 'product/detail.html?handle=balance-being' }
+    ],
+    C: [
+      { name: 'Bhakti Wins', img: 'assets/product_photos/POCKET%20PLANNERS/DAILY%20PRIORITIZER_prod%20photo.png', url: 'product/detail.html?handle=sadhana-in-sync' },
+      { name: 'Sadhana in Sync', img: 'assets/product_photos/PLANNERS/SADHANA%20IN%20SYNC_prod%20photo.png', url: 'product/detail.html?handle=sadhana-in-sync' },
+      { name: 'Daily Prioritizer', img: 'assets/product_photos/POCKET%20PLANNERS/DAILY%20PRIORITIZER_prod%20photo.png', url: 'product/detail.html?handle=daily-prioritizer' },
+      { name: 'Holistic Jotter', img: 'assets/product_photos/PLANNERS/BALANCE%20IN%20BEING_prod%20photo.png', url: 'product/detail.html?handle=holistic-jotter' }
+    ],
+    D: [
+      { name: 'Sadhana in Sync', img: 'assets/product_photos/PLANNERS/SADHANA%20IN%20SYNC_prod%20photo.png', url: 'product/detail.html?handle=sadhana-in-sync' },
+      { name: '108 Days with Krishna', img: 'assets/product_photos/108%20DAYS%20WITH%20KRISHNA%20JOURNALING%20KIT/MOCKUP.png', url: 'product/108-days-with-krishna.html' },
+      { name: 'Daily Prioritizer', img: 'assets/product_photos/POCKET%20PLANNERS/DAILY%20PRIORITIZER_prod%20photo.png', url: 'product/detail.html?handle=daily-prioritizer' },
+      { name: 'Holistic Jotter', img: 'assets/product_photos/PLANNERS/BALANCE%20IN%20BEING_prod%20photo.png', url: 'product/detail.html?handle=holistic-jotter' }
+    ],
+    E: [
+      { name: 'Soulful Self-Care Checklist', img: 'assets/product_photos/PLANNERS/SOULFUL%20SELF%20CARE%20CHECKLIST_prod%20photo.png', url: 'product/detail.html?handle=soulful-self-care-checklist' },
+      { name: 'Balance in Being', img: 'assets/product_photos/PLANNERS/BALANCE%20IN%20BEING_prod%20photo.png', url: 'product/detail.html?handle=balance-being' },
+      { name: 'Heart of Virtues', img: 'assets/product_photos/HEART%20OF%20VIRTUES%20JOURNALING%20KIT/1st%20photo_mockup.png', url: 'product/heart-of-virtues.html' },
+      { name: 'Do It for Krishna', img: 'assets/product_photos/POCKET%20PLANNERS/DO%20IT%20FOR%20KRSNA_prod%20photo.png', url: 'product/detail.html?handle=do-it-for-krsna' }
+    ]
+  };
+
+  const RESULT_LABELS = {
+    A: { heading: 'You need Daily Gratitude & Connection', sub: 'Based on your answers, these Soulscribe offerings are made for you:' },
+    B: { heading: 'You seek Prayer & Self-Expression', sub: 'Based on your answers, these Soulscribe offerings are made for you:' },
+    C: { heading: 'You flourish with Purpose & Productivity', sub: 'Based on your answers, these Soulscribe offerings are made for you:' },
+    D: { heading: 'You grow with Self-Reflection', sub: 'Based on your answers, these Soulscribe offerings are made for you:' },
+    E: { heading: 'You need Inner Well-Being & Balance', sub: 'Based on your answers, these Soulscribe offerings are made for you:' }
+  };
+
+  toggleBtn.addEventListener('click', function() {
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    toggleBtn.textContent = isOpen ? 'Take the Soul Quiz ✦' : 'Close the quiz';
+  });
+
+  document.querySelectorAll('.quiz-options').forEach(function(opts) {
+    opts.addEventListener('click', function(e) {
+      const option = e.target.closest('.quiz-option');
+      if (!option) return;
+      const radio= option.querySelector('input[type=radio]');
+      if (!radio) return;
+      opts.querySelectorAll('.quiz-option').forEach(o=> o.classList.remove('selected'));
+      option.classList.add('selected');
+      radio.checked = true;
+      answers[current] = radio.value;
+      const step = option.closest('.quiz-step');
+      if (step) step.querySelector('.quiz-btn-next').disabled = false;
+    });
+  });
+
+  document.querySelectorAll('.quiz-btn-next').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (btn.classList.contains('quiz-submit')) { showResults(); return; }
+      goTo(current + 1);
+    });
+  });
+
+  document.querySelectorAll('.quiz-btn-back').forEach(function(btn) {
+    btn.addEventListener('click', function() { goTo(current - 1); });
+  });
+
+  function goTo(index) {
+    document.querySelectorAll('.quiz-step')[current].classList.remove('active');
+    current = index;
+    document.querySelectorAll('.quiz-step')[current].classList.add('active');
+    const pct = (current / TOTAL) * 100;
+    progress.style.width = pct + '%';
+    const nextBtn = document.querySelectorAll('.quiz-step')[current].querySelector('.quiz-btn-next');
+    if (nextBtn) nextBtn.disabled = answers[current] === null;
+  }
+
+  function showResults() {
+    const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+    answers.forEach(a => { if (a) counts[a]++; });
+    const winner = Object.entries(counts).sort((x, y) => y[1] - x[1])[0][0];
+    const label  = RESULT_LABELS[winner];
+    document.getElementById('resultHeading').textContent = label.heading;
+    document.getElementById('resultSub').textContent     = label.sub;
+    const grid = document.getElementById('resultGrid');
+    grid.innerHTML = PRODUCTS[winner].map(p => `
+      <div class="quiz-result-card" style="background:#fff; border-radius:1rem; padding:1.2rem; box-shadow:0 6px 22px rgba(0,0,0,0.06); display:flex; flex-direction:column; justify-content:space-between; align-items:center; border:1px solid rgba(0,0,0,0.05);">
+        <a href="${p.url}" style="width:100%; text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center;">
+          <div style="width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:0.75rem; margin-bottom:0.85rem; background:#f9f9f9; display:flex; align-items:center; justify-content:center;">
+            <img src="${p.img}" alt="${p.name}" style="width:100%; height:100%; object-fit:contain;" loading="lazy">
+          </div>
+          <h4 style="font-size:1rem; font-family:var(--font-display); color:var(--ink); margin:0.4rem 0 0.8rem; min-height:2.6em; display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.3;">${p.name}</h4>
+        </a>
+        <a class="btn-yellow-gradient" href="${p.url}" style="text-decoration: none; padding:0.55rem 1.4rem; font-size:0.85rem; border-radius:999px; margin-top: 0.25rem;">Explore →</a>
+      </div>
+    `).join('');
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    progress.style.width = '100%';
+    results.classList.add('visible');
+  }
+
+  retake.addEventListener('click', function() {
+    answers.fill(null);
+    current = 0;
+    results.classList.remove('visible');
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-option').forEach(o=> o.classList.remove('selected'));
+    document.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    document.querySelectorAll('.quiz-btn-next').forEach(b => b.disabled = true);
+    document.querySelectorAll('.quiz-step')[0].classList.add('active');
+    progress.style.width = '0%';
+  });
+})();
+</script>
+</body>
+</html>

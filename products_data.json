@@ -1,0 +1,683 @@
+{
+  "data": {
+    "collections": {
+      "nodes": [
+        {
+          "id": "gid://shopify/Collection/484029890775",
+          "title": "JOURNALING KITS",
+          "handle": "journaling-kits",
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/10314236199127",
+                "title": "Thankyou Krishna",
+                "handle": "thankyou-krishna",
+                "description": "A gentle space to notice, cherish, and thank Krishna for the quiet ways He's always been there",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/29.png?v=1790249108"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/50520910299351",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9198121550039",
+                "title": "Shravanam To Smaranam",
+                "handle": "shravanam-to-smaranam-journaling-kit",
+                "description": "A sacred space where hearing becomes remembering—and every lecture, every verse, every realization finds its way from your ears to your heart.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/3.png?v=1772213561"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327363526871",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9198118142167",
+                "title": "Heart Of Virtues",
+                "handle": "heart-of-virtues-journaling-kit",
+                "description": "A gentle guide to discovering who you really are—by nurturing the values that make you a better soul, and a little more like Krishna.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/15.png?v=1772213462"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327358775511",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9197125566679",
+                "title": "Mercy And Meltdowns",
+                "handle": "mercy-and-meltdowns-journaling-kit",
+                "description": "A gentle companion for your highest highs and lowest lows—where every \"Dear Krishna\" becomes a step closer to His heart.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/41.png?v=1772190566"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48325808029911",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9197111738583",
+                "title": "Prayers From Within",
+                "handle": "prayers-from-within-journaling-kit",
+                "description": "A sacred space to speak your heart and hear His in return—one prayer at a time, one page at a time.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/22.png?v=1772190276"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48325789843671",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9197105938647",
+                "title": "108 Days With Krishna",
+                "handle": "108-days-with-krishna-journaling-kit",
+                "description": "A 108-day pilgrimage into your own heart—one question a day, drawing you closer to Krishna, one realization at a time.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/36.png?v=1772190082"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48325782470871",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "1551.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Collection/484029923543",
+          "title": "PLANNERS",
+          "handle": "planners",
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/9198139441367",
+                "title": "Sadhana In Sync",
+                "handle": "sadhana-in-sync",
+                "description": "A weekly glance that keeps your spiritual life in rhythm—because consistency feels better when you can see it.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SADHANAINSYNC_prodphoto.png?v=1772214023"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327387185367",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "666.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9198137344215",
+                "title": "Balance Being",
+                "handle": "balance-being",
+                "description": "A gentle daily check-in across four simple quadrants—because balance isn't a destination, it's a practice.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/BALANCEINBEING_prodphoto.png?v=1772213972"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327383875799",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "666.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9198134329559",
+                "title": "Soulful Self-Care",
+                "handle": "soulful-self-care-checklist",
+                "description": "A gentle daily reminder that caring for your soul is just as important as caring for your body—one small check at a time.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SOULFULSELFCARECHECKLIST_prodphoto.png?v=1772213885"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327380336855",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "666.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Collection/484030120151",
+          "title": "POCKET PLANNERS",
+          "handle": "pocket-planners",
+          "products": {
+            "nodes": [
+              {
+                "id": "gid://shopify/Product/9198147469527",
+                "title": "Daily Prioritizer",
+                "handle": "daily-prioritizer",
+                "description": "A pocket-sized pause before the chaos begins—so your day flows with purpose, not just pressure.",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DAILYPRIORITIZER_prodphoto.png?v=1772214217"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327398850775",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "333.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "gid://shopify/Product/9198145241303",
+                "title": "Do It For Krsna",
+                "handle": "do-it-for-krsna",
+                "description": "A daily reminder toDo it for krsna dedicate every action as a offering to the lord",
+                "featuredImage": {
+                  "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DOITFORKRSNA_prodphoto.png?v=1772214166"
+                },
+                "variants": {
+                  "nodes": [
+                    {
+                      "id": "gid://shopify/ProductVariant/48327395082455",
+                      "title": "Default Title",
+                      "price": {
+                        "amount": "333.0",
+                        "currencyCode": "INR"
+                      },
+                      "availableForSale": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "products": {
+      "nodes": [
+        {
+          "id": "gid://shopify/Product/9197105938647",
+          "title": "108 Days With Krishna",
+          "handle": "108-days-with-krishna-journaling-kit",
+          "description": "A 108-day pilgrimage into your own heart—one question a day, drawing you closer to Krishna, one realization at a time.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/36.png?v=1772190082"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/36.png?v=1772190082"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/37.png?v=1772190082"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/38.png?v=1772190084"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/39.png?v=1772190084"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48325782470871",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9197111738583",
+          "title": "Prayers From Within",
+          "handle": "prayers-from-within-journaling-kit",
+          "description": "A sacred space to speak your heart and hear His in return—one prayer at a time, one page at a time.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/22.png?v=1772190276"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/22.png?v=1772190276"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/23.png?v=1772190276"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/24.png?v=1772190275"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/25.png?v=1772190276"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/26.png?v=1772190276"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/27.png?v=1772190276"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48325789843671",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9197125566679",
+          "title": "Mercy And Meltdowns",
+          "handle": "mercy-and-meltdowns-journaling-kit",
+          "description": "A gentle companion for your highest highs and lowest lows—where every \"Dear Krishna\" becomes a step closer to His heart.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/41.png?v=1772190566"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/41.png?v=1772190566"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/42.png?v=1772190566"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/43.png?v=1772190566"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/44.png?v=1772190565"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48325808029911",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198118142167",
+          "title": "Heart Of Virtues",
+          "handle": "heart-of-virtues-journaling-kit",
+          "description": "A gentle guide to discovering who you really are—by nurturing the values that make you a better soul, and a little more like Krishna.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/15.png?v=1772213462"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/15.png?v=1772213462"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/19.png?v=1772213462"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/16.png?v=1772213463"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/17.png?v=1772213462"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/18.png?v=1772213462"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/20.png?v=1772213462"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327358775511",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198121550039",
+          "title": "Shravanam To Smaranam",
+          "handle": "shravanam-to-smaranam-journaling-kit",
+          "description": "A sacred space where hearing becomes remembering—and every lecture, every verse, every realization finds its way from your ears to your heart.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/3.png?v=1772213561"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/3.png?v=1772213561"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/4.png?v=1772213560"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/5.png?v=1772213561"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/6.png?v=1772213560"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/7.png?v=1772213560"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/8.png?v=1772213560"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/9.png?v=1772213560"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/10.png?v=1772213560"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327363526871",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198134329559",
+          "title": "Soulful Self-Care",
+          "handle": "soulful-self-care-checklist",
+          "description": "A gentle daily reminder that caring for your soul is just as important as caring for your body—one small check at a time.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SOULFULSELFCARECHECKLIST_prodphoto.png?v=1772213885"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SOULFULSELFCARECHECKLIST_prodphoto.png?v=1772213885"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327380336855",
+                "title": "Default Title",
+                "price": {
+                  "amount": "666.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198137344215",
+          "title": "Balance Being",
+          "handle": "balance-being",
+          "description": "A gentle daily check-in across four simple quadrants—because balance isn't a destination, it's a practice.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/BALANCEINBEING_prodphoto.png?v=1772213972"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/BALANCEINBEING_prodphoto.png?v=1772213972"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327383875799",
+                "title": "Default Title",
+                "price": {
+                  "amount": "666.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198139441367",
+          "title": "Sadhana In Sync",
+          "handle": "sadhana-in-sync",
+          "description": "A weekly glance that keeps your spiritual life in rhythm—because consistency feels better when you can see it.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SADHANAINSYNC_prodphoto.png?v=1772214023"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/SADHANAINSYNC_prodphoto.png?v=1772214023"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327387185367",
+                "title": "Default Title",
+                "price": {
+                  "amount": "666.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198145241303",
+          "title": "Do It For Krsna",
+          "handle": "do-it-for-krsna",
+          "description": "A daily reminder toDo it for krsna dedicate every action as a offering to the lord",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DOITFORKRSNA_prodphoto.png?v=1772214166"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DOITFORKRSNA_prodphoto.png?v=1772214166"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327395082455",
+                "title": "Default Title",
+                "price": {
+                  "amount": "333.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/9198147469527",
+          "title": "Daily Prioritizer",
+          "handle": "daily-prioritizer",
+          "description": "A pocket-sized pause before the chaos begins—so your day flows with purpose, not just pressure.",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DAILYPRIORITIZER_prodphoto.png?v=1772214217"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/DAILYPRIORITIZER_prodphoto.png?v=1772214217"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/48327398850775",
+                "title": "Default Title",
+                "price": {
+                  "amount": "333.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        },
+        {
+          "id": "gid://shopify/Product/10314236199127",
+          "title": "Thankyou Krishna",
+          "handle": "thankyou-krishna",
+          "description": "A gentle space to notice, cherish, and thank Krishna for the quiet ways He's always been there",
+          "featuredImage": {
+            "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/29.png?v=1790249108"
+          },
+          "images": {
+            "nodes": [
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/29.png?v=1790249108"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/32.png?v=1790249984"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/34.png?v=1790249752"
+              },
+              {
+                "url": "https://cdn.shopify.com/s/files/1/0810/5518/7159/files/30.png?v=1790249681"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "id": "gid://shopify/ProductVariant/50520910299351",
+                "title": "Default Title",
+                "price": {
+                  "amount": "1551.0",
+                  "currencyCode": "INR"
+                },
+                "availableForSale": true
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "cost": {
+      "requestedQueryCost": 509
+    }
+  }
+}

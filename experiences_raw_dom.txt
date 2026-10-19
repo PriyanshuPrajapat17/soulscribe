@@ -1,0 +1,12 @@
+STEP 686: Length 4338 chars
+STEP 688: Length 4483 chars
+STEP 708: Length 4395 chars
+STEP 715: Length 4395 chars
+STEP 717: Length 4338 chars
+STEP 736: Length 1061 chars
+STEP 774: Length 3487 chars
+STEP 776: Length 3363 chars
+STEP 777: Length 2514 chars
+STEP 781: Length 4517 chars
+STEP 782: Length 3107 chars
+STEP 783: Length 1527 chars
